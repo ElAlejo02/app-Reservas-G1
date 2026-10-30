@@ -1,6 +1,7 @@
 fastapi>=0.115,<1
 uvicorn[standard]>=0.30
 pymysql==1.1.*
+cryptography     # MySQL 8 la pide para validar la clave (caching_sha2)
 python-dotenv==1.*
 httpx            # lo usa TestClient en las pruebas
 ruff             # revisar PEP 8

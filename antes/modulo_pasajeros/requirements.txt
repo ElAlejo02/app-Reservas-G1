@@ -3,5 +3,6 @@
 # (Tkinter no se instala: viene incluido con Python en Windows.)
 
 pymysql==1.1.*        # Driver para conectarse a MySQL (como JDBC en Java)
+cryptography          # MySQL 8 la pide para validar la clave
 python-dotenv==1.*    # Lee las credenciales del archivo .env
 ruff                  # Revisa el estándar PEP 8 (opcional, para desarrollo)
