@@ -1,0 +1,21 @@
+# Archivos que nunca deben subirse al repositorio del proyecto.
+
+# Credenciales
+.env
+
+# Entornos virtuales de Python
+.venv/
+venv/
+
+# Archivos generados al ejecutar
+__pycache__/
+*.pyc
+*.db
+
+# Cache de herramientas
+.ruff_cache/
+.pytest_cache/
+
+# Dependencias de Node (frontend React)
+node_modules/
+dist/
