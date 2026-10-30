@@ -407,6 +407,7 @@ Las de la API crean cotizaciones de prueba y las borran al terminar.
 | `ModuleNotFoundError: app` | Estás en otra carpeta | Párate en `backend` |
 | 503 "No hay conexión con la base de datos" | MySQL apagado o clave mala en `.env` | Prende el servicio MySQL80 y revisa el `.env` |
 | Error de CORS en la consola del navegador | La página no está en la lista permitida | Abrirla con Live Server (puerto 5500) o agregarla a `ORIGENES_PERMITIDOS` |
+| "Internal Server Error" y en la terminal `'cryptography' package is required` | MySQL 8 usa un método de clave que PyMySQL solo entiende con esa librería | `pip install cryptography` y reiniciar uvicorn |
 | `/disponibilidad` devuelve `[]` | Fechas fuera de las temporadas cargadas, o la estadía cruza dos temporadas, o son demasiadas personas | Probar con fechas entre el 16 de enero y el 14 de junio de 2027 |
 | 409 "Esa tarifa no aplica" | Se mandó un `id_tarifa` de otra búsqueda | Volver a buscar disponibilidad |
 
