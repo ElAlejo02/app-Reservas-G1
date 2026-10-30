@@ -12,6 +12,8 @@ from typing import Literal
 from pydantic import BaseModel, Field, model_validator
 
 Estado = Literal["ABIERTA", "ENVIADA", "APROBADA", "RECHAZADA", "ANULADA"]
+Rol = Literal["ADMIN", "ASESOR", "OPERACION"]
+PATRON_CORREO = r"^[\w.+-]+@[\w-]+(\.[\w-]+)+$"
 
 
 # ---------------------------------------------------------------- catálogo
@@ -86,7 +88,7 @@ class NuevaCotizacion(SolicitudCotizacion):
     )
     cliente_correo: str = Field(
         max_length=100,
-        pattern=r"^[\w.+-]+@[\w-]+(\.[\w-]+)+$",
+        pattern=PATRON_CORREO,
         examples=["ventas@viajesdelsol.com"],
     )
 
@@ -130,6 +132,7 @@ class Cotizacion(BaseModel):
     adultos: int
     ninos: int
     fecha_creacion: datetime
+    asesor: str | None = Field(default=None, description="Quién la creó.")
     desglose: Desglose
 
 
@@ -145,3 +148,49 @@ class ResumenCotizacion(BaseModel):
 
 class CambioEstado(BaseModel):
     estado: Estado = Field(examples=["ENVIADA"])
+
+
+# ---------------------------------------------------------------- usuarios
+
+
+class NuevoUsuario(BaseModel):
+    nombre: str = Field(min_length=3, max_length=80, examples=["Ana Ruiz"])
+    correo: str = Field(
+        max_length=100, pattern=PATRON_CORREO, examples=["ana@hyd.com"]
+    )
+    # bcrypt solo usa los primeros 72 bytes, por eso el tope de 64.
+    clave: str = Field(min_length=8, max_length=64, examples=["Clave2026"])
+
+    @model_validator(mode="after")
+    def revisar_clave(self) -> NuevoUsuario:
+        tiene_letra = any(c.isalpha() for c in self.clave)
+        tiene_numero = any(c.isdigit() for c in self.clave)
+        if not (tiene_letra and tiene_numero):
+            raise ValueError("La clave debe tener letras y números.")
+        return self
+
+
+class Credenciales(BaseModel):
+    correo: str = Field(max_length=100, examples=["ana@hyd.com"])
+    clave: str = Field(max_length=64, examples=["Clave2026"])
+
+
+class Usuario(BaseModel):
+    id_usuario: int
+    nombre: str
+    correo: str
+    rol: Rol
+    activo: bool
+    fecha_creacion: datetime
+
+
+class Sesion(BaseModel):
+    access_token: str = Field(description="Va en Authorization: Bearer ...")
+    token_type: str = "bearer"
+    vence_en_minutos: int
+    usuario: Usuario
+
+
+class CambioUsuario(BaseModel):
+    rol: Rol | None = None
+    activo: bool | None = None
