@@ -4,6 +4,8 @@ Correr desde la carpeta backend:  uvicorn app.main:app --reload
 Documentación con botones de prueba:  http://127.0.0.1:8000/docs
 """
 
+import logging
+
 import pymysql
 from fastapi import FastAPI, Request
 from fastapi.encoders import jsonable_encoder
@@ -15,6 +17,8 @@ from app.calculos import CalculoError
 from app.config import config
 from app.rutas import catalogo, cotizaciones
 from app.servicios import NoEncontradoError, ReglaNoCumplidaError
+
+logger = logging.getLogger("uvicorn.error")
 
 app = FastAPI(
     title="Cotizador Hoteles y Destinos",
@@ -105,11 +109,24 @@ def _calculo(_: Request, error: CalculoError):
     return JSONResponse(status_code=422, content={"detail": str(error)})
 
 
+# Los errores de MySQL más comunes, con la pista de cómo arreglarlos.
+ERRORES_MYSQL = {
+    1045: "Usuario o clave incorrectos: revise DB_USER y DB_PASSWORD "
+    "del .env.",
+    1049: "No existe la base de datos: corra base_datos/01_esquema.sql.",
+    1146: "Falta una tabla: corra 01_esquema.sql y 02_datos_prueba.sql.",
+    2003: "MySQL está apagado: prenda el servicio MySQL80.",
+}
+
+
 @app.exception_handler(pymysql.MySQLError)
-def _sin_base_de_datos(_: Request, __: pymysql.MySQLError):
+def _sin_base_de_datos(_: Request, error: pymysql.MySQLError):
+    codigo = error.args[0] if error.args else None
+    logger.error("Error de MySQL %s: %s", codigo, error)
+    pista = ERRORES_MYSQL.get(codigo, "Revise la terminal del backend.")
     return JSONResponse(
         status_code=503,
-        content={"detail": "No hay conexión con la base de datos."},
+        content={"detail": f"No hay conexión con la base de datos. {pista}"},
     )
 
 
