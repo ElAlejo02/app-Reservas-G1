@@ -1,29 +1,13 @@
-"""Interfaz gráfica de escritorio (stand-alone) del módulo de pasajeros.
+"""Ventana de escritorio (Tkinter) del módulo de pasajeros.
 
-Se construye con Tkinter, la librería gráfica que ya viene instalada con
-Python. Es el equivalente a Swing (JFrame, JLabel, JTextField, JButton)
-que la instructora usó en Java:
-
-=================  =======================
-Java Swing         Python Tkinter
-=================  =======================
-JFrame             tk.Tk (ventana)
-JLabel             ttk.Label
-JTextField         ttk.Entry
-JComboBox          ttk.Combobox
-JButton            ttk.Button
-JTable             ttk.Treeview
-JOptionPane        tkinter.messagebox
-=================  =======================
-
-Cada caso de uso (historia de usuario) es un botón: Guardar, Buscar,
-Modificar, Eliminar y Limpiar. La tabla inferior lista los pasajeros.
+Cada botón es una historia de usuario: Guardar, Buscar, Modificar,
+Eliminar y Limpiar.
 """
 
 from __future__ import annotations
 
-import tkinter as tk  # "as tk" crea un alias corto para escribir menos.
-from tkinter import messagebox, ttk  # ttk = widgets con estilo moderno.
+import tkinter as tk
+from tkinter import messagebox, ttk
 
 import pymysql
 
@@ -31,13 +15,9 @@ from pasajeros import repositorio
 from pasajeros.modelo import Pasajero
 from pasajeros.validaciones import TIPOS_DOCUMENTO, validar_pasajero
 
-# --- Constantes de la interfaz ------------------------------------------
 TITULO = "Hoteles y Destinos S.A.S. | Gestión de pasajeros"
-TAMANO_VENTANA = "900x620"  # ancho x alto en píxeles.
+TAMANO_VENTANA = "900x620"
 
-# Campos del formulario: (llave interna, texto que ve el usuario).
-# Usamos la MISMA llave que los atributos de Pasajero para poder pasar
-# los datos de un lado a otro sin traducir nombres.
 CAMPOS = (
     ("nombre", "Nombre"),
     ("apellido", "Apellido"),
@@ -49,7 +29,6 @@ CAMPOS = (
     ("correo", "Correo electrónico"),
 )
 
-# Columnas de la tabla: (llave, título, ancho en píxeles).
 COLUMNAS_TABLA = (
     ("numero_documento", "Documento", 110),
     ("tipo_documento", "Tipo", 50),
@@ -68,28 +47,14 @@ MENSAJE_SIN_CONEXION = (
 )
 
 
-# La clase HEREDA de tk.Tk: "VentanaPasajeros ES una ventana". Igual que
-# en Java "public class FrmPersona extends JFrame".
 class VentanaPasajeros(tk.Tk):
-    """Ventana principal con el formulario y la tabla de pasajeros."""
-
-    # ------------------------------------------------------------------
-    # Constructor: arma la ventana una sola vez al crearla.
-    # ------------------------------------------------------------------
     def __init__(self) -> None:
-        """Crea la ventana, sus componentes y carga la tabla."""
-        # super().__init__() ejecuta primero el constructor de tk.Tk
-        # (el "padre"). Sin esto la ventana no existiría.
         super().__init__()
         self.title(TITULO)
         self.geometry(TAMANO_VENTANA)
-        self.minsize(820, 560)  # Tamaño mínimo al redimensionar.
+        self.minsize(820, 560)
 
-        # Diccionario donde guardamos cada caja de texto por su llave,
-        # para leerlas y escribirlas en un ciclo en vez de una por una.
         self.entradas: dict[str, ttk.Entry | ttk.Combobox] = {}
-        # Texto de la barra de estado inferior. StringVar es una
-        # variable "observada": si cambia, la etiqueta se actualiza sola.
         self.estado = tk.StringVar(value="Listo.")
 
         self._crear_encabezado()
@@ -99,40 +64,24 @@ class VentanaPasajeros(tk.Tk):
         self._crear_barra_estado()
         self.refrescar_tabla()
 
-    # ------------------------------------------------------------------
-    # Construcción de la interfaz (métodos privados con "_").
-    # ------------------------------------------------------------------
     def _crear_encabezado(self) -> None:
-        """Título grande en la parte superior."""
         encabezado = ttk.Label(
             self,
             text="Gestión de pasajeros",
             font=("Segoe UI", 16, "bold"),
         )
-        # pack() acomoda el widget de arriba hacia abajo.
-        # padx/pady = margen horizontal/vertical en píxeles.
         encabezado.pack(pady=(12, 4))
 
     def _crear_formulario(self) -> None:
-        """Etiquetas y cajas de texto en una cuadrícula de 2 columnas."""
-        # LabelFrame es un recuadro con título (como un JPanel con borde).
         marco = ttk.LabelFrame(self, text="Datos del pasajero", padding=10)
-        # fill="x" estira el marco a lo ancho de la ventana.
         marco.pack(fill="x", padx=12, pady=6)
 
-        # enumerate() entrega la posición (0, 1, 2...) y el elemento.
         for indice, (llave, texto) in enumerate(CAMPOS):
-            # divmod(7, 2) = (3, 1): cociente y residuo. Lo usamos para
-            # repartir los 8 campos en 4 filas y 2 columnas.
-            fila, columna = divmod(indice, 2)
-            # Cada campo ocupa 2 columnas de la cuadrícula: etiqueta y
-            # caja. Por eso la columna real es columna * 2.
+            fila, columna = divmod(indice, 2)  # 8 campos en 4 filas x 2
             ttk.Label(marco, text=texto).grid(
                 row=fila, column=columna * 2, sticky="w", padx=4, pady=4
             )
             if llave == "tipo_documento":
-                # Lista desplegable. state="readonly" obliga a escoger
-                # una opción y no permite escribir texto libre.
                 caja = ttk.Combobox(
                     marco,
                     values=list(TIPOS_DOCUMENTO),
@@ -150,20 +99,15 @@ class VentanaPasajeros(tk.Tk):
             )
             self.entradas[llave] = caja
 
-        # Valor por defecto para agilizar: la mayoría son colombianos.
         self.entradas["pais"].insert(0, "Colombia")
-        # weight=1 hace que las columnas de cajas crezcan al agrandar.
         marco.columnconfigure(1, weight=1)
         marco.columnconfigure(3, weight=1)
 
     def _crear_botones(self) -> None:
-        """Un botón por cada caso de uso del módulo."""
         marco = ttk.Frame(self)
         marco.pack(pady=6)
-        # (texto del botón, método que se ejecuta al hacer clic).
-        # OJO: se pasa self.guardar SIN paréntesis. Con paréntesis se
-        # ejecutaría ya mismo; sin ellos se entrega la función para que
-        # Tkinter la llame cuando el usuario haga clic.
+        # Sin paréntesis: se entrega la función para que Tkinter la llame
+        # al hacer clic, no se ejecuta todavía.
         acciones = (
             ("Guardar", self.guardar),
             ("Buscar", self.buscar),
@@ -177,14 +121,10 @@ class VentanaPasajeros(tk.Tk):
             )
 
     def _crear_tabla(self) -> None:
-        """Tabla (Treeview) que lista los pasajeros guardados."""
         marco = ttk.LabelFrame(self, text="Pasajeros registrados", padding=6)
-        # expand=True + fill="both": la tabla ocupa el espacio sobrante.
         marco.pack(fill="both", expand=True, padx=12, pady=6)
 
-        # Comprehension que saca solo las llaves de COLUMNAS_TABLA.
         llaves = [llave for llave, _, _ in COLUMNAS_TABLA]
-        # show="headings" oculta la primera columna "árbol" vacía.
         self.tabla = ttk.Treeview(
             marco, columns=llaves, show="headings", height=10
         )
@@ -192,7 +132,6 @@ class VentanaPasajeros(tk.Tk):
             self.tabla.heading(llave, text=titulo)
             self.tabla.column(llave, width=ancho, anchor="w")
 
-        # Barra de desplazamiento vertical conectada a la tabla.
         barra = ttk.Scrollbar(
             marco, orient="vertical", command=self.tabla.yview
         )
@@ -200,62 +139,42 @@ class VentanaPasajeros(tk.Tk):
         self.tabla.pack(side="left", fill="both", expand=True)
         barra.pack(side="right", fill="y")
 
-        # bind() conecta un EVENTO con un método. <<TreeviewSelect>>
-        # ocurre cuando el usuario hace clic en una fila.
         self.tabla.bind("<<TreeviewSelect>>", self._al_seleccionar_fila)
 
     def _crear_barra_estado(self) -> None:
-        """Línea inferior que informa el resultado de cada acción."""
         ttk.Label(
             self, textvariable=self.estado, relief="sunken", anchor="w"
         ).pack(fill="x", side="bottom")
 
-    # ------------------------------------------------------------------
-    # Utilidades del formulario.
-    # ------------------------------------------------------------------
     def _leer_formulario(self) -> dict[str, str]:
-        """Devuelve lo escrito en cada caja como diccionario de textos."""
-        # Dict comprehension: {llave: valor for ...}. .get() lee el
-        # texto actual de una caja Entry o Combobox.
         return {llave: caja.get() for llave, caja in self.entradas.items()}
 
     def _llenar_formulario(self, pasajero: Pasajero) -> None:
-        """Escribe los datos de un pasajero en las cajas de texto."""
         self.limpiar(mensaje=False)
         for llave, caja in self.entradas.items():
-            # getattr(objeto, "nombre") lee un atributo usando su nombre
-            # como texto. Equivale a pasajero.nombre, pasajero.apellido...
             valor = str(getattr(pasajero, llave))
             if isinstance(caja, ttk.Combobox):
                 caja.set(valor)
             else:
-                caja.delete(0, tk.END)  # Borra desde 0 hasta el final.
+                caja.delete(0, tk.END)
                 caja.insert(0, valor)
 
     def _documento_escrito(self) -> str:
-        """Lee el número de documento del formulario sin espacios."""
         return self.entradas["numero_documento"].get().strip().upper()
 
     def _avisar(self, mensaje: str) -> None:
-        """Actualiza la barra de estado."""
         self.estado.set(mensaje)
 
-    # ------------------------------------------------------------------
-    # Casos de uso: un método por botón.
-    # Todos siguen el mismo esquema try/except:
-    #   * ValueError         -> dato inválido o regla de negocio.
-    #   * pymysql.MySQLError -> problema con la base de datos.
-    # Así el programa NUNCA se cierra de golpe por un error.
-    # ------------------------------------------------------------------
+    # Cada botón atrapa dos errores: ValueError (dato malo) y MySQLError
+    # (sin base de datos). Así la ventana nunca se cierra de golpe.
     def guardar(self) -> None:
         """HU-01: registrar un pasajero nuevo."""
         try:
             pasajero = validar_pasajero(self._leer_formulario())
             repositorio.crear(pasajero)
         except ValueError as error:
-            # showwarning = ventana amarilla de advertencia.
             messagebox.showwarning("Dato inválido", str(error))
-            return  # Sale del método sin seguir.
+            return
         except pymysql.MySQLError:
             messagebox.showerror("Error de conexión", MENSAJE_SIN_CONEXION)
             return
@@ -324,8 +243,6 @@ class VentanaPasajeros(tk.Tk):
                 "Busque o seleccione el pasajero que desea eliminar.",
             )
             return
-        # askyesno devuelve True si el usuario pulsa "Sí". Borrar no se
-        # puede deshacer, por eso siempre se pregunta antes.
         confirmado = messagebox.askyesno(
             "Confirmar eliminación",
             f"¿Seguro que desea eliminar el pasajero {documento}?\n"
@@ -350,29 +267,22 @@ class VentanaPasajeros(tk.Tk):
         self.refrescar_tabla()
 
     def limpiar(self, mensaje: bool = True) -> None:
-        """Deja el formulario en blanco para un registro nuevo.
+        """Deja el formulario listo para otro registro.
 
-        Args:
-            mensaje: Si es ``True`` actualiza la barra de estado. Los
-                otros métodos lo llaman con ``False`` para no tapar su
-                propio mensaje.
+        Con mensaje=False no tapa el aviso de quien lo llamó.
         """
-        # .values() recorre solo las cajas (no necesitamos las llaves).
         for caja in self.entradas.values():
             if isinstance(caja, ttk.Combobox):
                 caja.set("")
             else:
                 caja.delete(0, tk.END)
         self.entradas["pais"].insert(0, "Colombia")
-        # focus() pone el cursor en la caja "nombre" para escribir ya.
         self.entradas["nombre"].focus()
         if mensaje:
             self._avisar("Formulario limpio.")
 
     def refrescar_tabla(self) -> None:
         """HU-03: listar todos los pasajeros en la tabla."""
-        # Primero se borran las filas actuales de la tabla en pantalla.
-        # El asterisco (*) entrega cada elemento como argumento aparte.
         self.tabla.delete(*self.tabla.get_children())
         try:
             pasajeros = repositorio.listar()
@@ -383,20 +293,13 @@ class VentanaPasajeros(tk.Tk):
             valores = [
                 getattr(pasajero, llave) for llave, _, _ in COLUMNAS_TABLA
             ]
-            # iid = identificador de la fila en la tabla; usamos el
-            # documento para recuperarlo al hacer clic.
             self.tabla.insert(
                 "", tk.END, iid=pasajero.numero_documento, values=valores
             )
         self._avisar(f"{len(pasajeros)} pasajero(s) registrado(s).")
 
     def _al_seleccionar_fila(self, _evento: tk.Event) -> None:
-        """Al hacer clic en una fila, carga ese pasajero al formulario.
-
-        Args:
-            _evento: Información del clic que envía Tkinter. No la
-                usamos; el guion bajo inicial lo indica.
-        """
+        """Al hacer clic en una fila, carga ese pasajero."""
         seleccion = self.tabla.selection()
         if not seleccion:
             return

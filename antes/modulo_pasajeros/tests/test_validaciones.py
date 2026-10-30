@@ -1,33 +1,15 @@
-"""Pruebas unitarias de las reglas de validación (GA7-AA3-EV02).
-
-Una prueba unitaria revisa UNA regla de forma automática: le da un dato
-al código y compara el resultado con lo esperado. Se usa ``unittest``,
-que viene con Python (es el equivalente a JUnit en Java).
-
-Ejecutar desde la carpeta ``modulo_pasajeros``::
-
-    python -m unittest -v
-
-Las pruebas están agrupadas por el tipo de validación que pide la guía:
-textos, caracteres especiales, longitudes, números, fechas y correo.
-"""
+"""Pruebas de las validaciones. Correr con:  python -m unittest -v"""
 
 import unittest
 from datetime import date
 
 from pasajeros import validaciones as v
 
-# Fecha fija para que las pruebas den siempre el mismo resultado, sin
-# importar el día en que se ejecuten.
-HOY = date(2026, 10, 28)
+HOY = date(2026, 10, 28)  # fija, para que la edad no cambie con el año
 
 
 def datos_validos(**cambios: str) -> dict[str, str]:
-    """Devuelve un formulario correcto, cambiando solo lo indicado.
-
-    Ejemplo: ``datos_validos(correo="malo")`` arma un formulario
-    perfecto excepto el correo. Así cada prueba cambia UN solo campo.
-    """
+    """Formulario correcto; solo cambia lo que se le pase."""
     datos = {
         "nombre": "Ana María",
         "apellido": "Ruiz Gómez",
@@ -38,7 +20,7 @@ def datos_validos(**cambios: str) -> dict[str, str]:
         "celular": "3001112233",
         "correo": "ana.ruiz@ejemplo.com",
     }
-    datos.update(cambios)  # Sobrescribe solo las llaves enviadas.
+    datos.update(cambios)
     return datos
 
 
@@ -46,7 +28,6 @@ class PruebasTextos(unittest.TestCase):
     """Validaciones de textos: obligatorio, letras y longitudes."""
 
     def test_texto_valido_se_limpia(self):
-        # assertEqual(a, b) falla si a y b son distintos.
         self.assertEqual(
             v.validar_texto("  Ana   María ", "nombre"), "Ana María"
         )
@@ -57,7 +38,6 @@ class PruebasTextos(unittest.TestCase):
         )
 
     def test_texto_vacio_es_rechazado(self):
-        # assertRaises verifica que el bloque LANCE el error esperado.
         with self.assertRaises(ValueError):
             v.validar_texto("   ", "nombre")
 
@@ -71,7 +51,6 @@ class PruebasCaracteresEspeciales(unittest.TestCase):
 
     def test_simbolos_en_nombre_son_rechazados(self):
         for malo in ("Ana@", "Luis#", "<script>", "Ana; DROP TABLE"):
-            # subTest muestra cuál valor falló si alguno falla.
             with self.subTest(valor=malo):
                 with self.assertRaises(ValueError):
                     v.validar_texto(malo, "nombre")
@@ -215,6 +194,5 @@ class PruebasFormularioCompleto(unittest.TestCase):
         self.assertEqual(pasajero.tipo_documento, "TI")
 
 
-# Permite correr este archivo solo: python tests/test_validaciones.py
 if __name__ == "__main__":
     unittest.main()

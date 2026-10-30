@@ -1,6 +1,6 @@
 # Guía explicada del módulo de pasajeros
 
-Esta guía va de lo simple a lo complejo. Primero la idea general, luego cada archivo en el orden en que conviene estudiarlos (cada uno usa el anterior) y al final el recorrido completo de un clic. El código tiene comentarios línea por línea; aquí está el "porqué" de cada decisión.
+Esta guía va de lo simple a lo complejo. Primero la idea general, luego cada archivo en el orden en que conviene estudiarlos (cada uno usa el anterior) y al final el recorrido completo de un clic. El código solo tiene comentarios donde algo no es obvio; la explicación completa de cada parte está aquí.
 
 Tiempo sugerido: 6 pomodoros de 25 minutos, uno por cada parte numerada del 1 al 6.
 
@@ -184,13 +184,13 @@ y el resultado es exactamente el diccionario que espera `validar_pasajero`. Usar
 try:
     pasajero = validar_pasajero(self._leer_formulario())
     repositorio.crear(pasajero)
-except ValueError as error:          # dato malo o regla de negocio
+except ValueError as error:  # dato malo o regla de negocio
     messagebox.showwarning(...)
     return
-except pymysql.MySQLError:           # MySQL apagado o clave mala
+except pymysql.MySQLError:  # MySQL apagado o clave mala
     messagebox.showerror(...)
     return
-messagebox.showinfo(...)             # todo salió bien
+messagebox.showinfo(...)  # todo salió bien
 ```
 
 Dos tipos de error, dos mensajes distintos. El programa nunca se cierra de golpe.

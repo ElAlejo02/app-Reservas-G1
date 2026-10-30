@@ -1,12 +1,4 @@
-"""Pruebas de integración del CRUD contra MySQL real.
-
-A diferencia de las pruebas unitarias, estas SÍ escriben en la base de
-datos: crean un pasajero de prueba, lo buscan, lo modifican y lo
-eliminan. Así se demuestra que el CRUD completo funciona.
-
-Si MySQL no está disponible, las pruebas se marcan como "omitidas"
-(skipped) en vez de fallar.
-"""
+"""Pruebas del CRUD contra MySQL. Si MySQL está apagado, se saltan."""
 
 import unittest
 from datetime import date
@@ -17,8 +9,6 @@ from pasajeros import repositorio
 from pasajeros.conexion import obtener_conexion
 from pasajeros.modelo import Pasajero
 
-# Documento que no usaría ninguna persona real, para no chocar con
-# datos verdaderos.
 DOCUMENTO_PRUEBA = "99999999"
 
 
@@ -31,13 +21,12 @@ def hay_base_de_datos() -> bool:
         return False
 
 
-# El decorador salta TODA la clase si no hay conexión.
 @unittest.skipUnless(hay_base_de_datos(), "MySQL no está disponible")
 class PruebasCrudPasajeros(unittest.TestCase):
     """Ciclo completo: crear, buscar, listar, actualizar y eliminar."""
 
     def setUp(self):
-        """Se ejecuta ANTES de cada prueba: deja la base sin residuos."""
+        """Antes de cada prueba."""
         repositorio.eliminar(DOCUMENTO_PRUEBA)
         self.pasajero = Pasajero(
             nombre="Prueba",
@@ -51,7 +40,7 @@ class PruebasCrudPasajeros(unittest.TestCase):
         )
 
     def tearDown(self):
-        """Se ejecuta DESPUÉS de cada prueba: borra lo que se creó."""
+        """Después de cada prueba: no dejar basura."""
         repositorio.eliminar(DOCUMENTO_PRUEBA)
 
     def test_crear_y_buscar(self):
