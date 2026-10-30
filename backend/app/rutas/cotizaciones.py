@@ -1,6 +1,6 @@
 """Calcular, guardar, consultar y mover de estado las cotizaciones."""
 
-from fastapi import APIRouter, Query, status
+from fastapi import APIRouter, Depends, Query, status
 
 from app import servicios
 from app.esquemas import (
@@ -13,8 +13,11 @@ from app.esquemas import (
     SolicitudCotizacion,
 )
 from app.repositorios import cotizaciones
+from app.seguridad import solo_roles, usuario_actual
 
 router = APIRouter(prefix="/cotizaciones", tags=["Cotizaciones"])
+# Calcular es libre; guardar y cambiar estado son de quien vende.
+vendedor = solo_roles("ADMIN", "ASESOR")
 
 
 @router.post(
@@ -33,14 +36,17 @@ def calcular_cotizacion(solicitud: SolicitudCotizacion):
     status_code=status.HTTP_201_CREATED,
     summary="Guardar cotización",
 )
-def guardar_cotizacion(nueva: NuevaCotizacion):
-    return servicios.crear(nueva)
+def guardar_cotizacion(
+    nueva: NuevaCotizacion, usuario: dict = Depends(vendedor)
+):
+    return servicios.crear(nueva, usuario)
 
 
 @router.get(
     "",
     response_model=list[ResumenCotizacion],
     summary="Ver cotizaciones (las más nuevas primero)",
+    dependencies=[Depends(usuario_actual)],
 )
 def ver_cotizaciones(
     estado: Estado | None = None,
@@ -53,6 +59,7 @@ def ver_cotizaciones(
     "/{codigo}",
     response_model=Cotizacion,
     summary="Ver una cotización",
+    dependencies=[Depends(usuario_actual)],
 )
 def ver_cotizacion(codigo: str):
     return servicios.obtener(codigo)
@@ -62,6 +69,7 @@ def ver_cotizacion(codigo: str):
     "/{codigo}/estado",
     response_model=Cotizacion,
     summary="Cambiar estado de una cotización",
+    dependencies=[Depends(vendedor)],
 )
 def cambiar_estado(codigo: str, cambio: CambioEstado):
     """ABIERTA → ENVIADA → APROBADA o RECHAZADA. Se puede ANULAR antes de

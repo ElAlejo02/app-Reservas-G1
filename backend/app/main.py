@@ -15,7 +15,8 @@ from fastapi.responses import JSONResponse
 
 from app.calculos import CalculoError
 from app.config import config
-from app.rutas import catalogo, cotizaciones
+from app.rutas import catalogo, cotizaciones, usuarios
+from app.seguridad import NoAutenticadoError, SinPermisoError
 from app.servicios import NoEncontradoError, ReglaNoCumplidaError
 
 logger = logging.getLogger("uvicorn.error")
@@ -27,6 +28,11 @@ app = FastAPI(
     "ADSO, ficha 3134707.",
     openapi_tags=[
         {"name": "Sistema", "description": "Saber si la API está viva."},
+        {
+            "name": "Usuarios",
+            "description": "Registro, inicio de sesión y roles. Después "
+            "de iniciar sesión, pegue el token en el botón Authorize.",
+        },
         {
             "name": "Catálogo",
             "description": "Destinos, hoteles y "
@@ -54,6 +60,7 @@ app.add_middleware(
 
 app.include_router(catalogo.router)
 app.include_router(cotizaciones.router)
+app.include_router(usuarios.router)
 
 
 # Cada error del negocio se vuelve una respuesta clara con su código HTTP.
@@ -102,6 +109,20 @@ def _no_encontrado(_: Request, error: NoEncontradoError):
 @app.exception_handler(ReglaNoCumplidaError)
 def _regla(_: Request, error: ReglaNoCumplidaError):
     return JSONResponse(status_code=409, content={"detail": str(error)})
+
+
+@app.exception_handler(NoAutenticadoError)
+def _sin_sesion(_: Request, error: NoAutenticadoError):
+    return JSONResponse(
+        status_code=401,
+        content={"detail": str(error)},
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+
+@app.exception_handler(SinPermisoError)
+def _sin_permiso(_: Request, error: SinPermisoError):
+    return JSONResponse(status_code=403, content={"detail": str(error)})
 
 
 @app.exception_handler(CalculoError)

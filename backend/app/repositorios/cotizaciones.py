@@ -10,7 +10,7 @@ _COLUMNAS = (
     "c.fecha_entrada, c.fecha_salida, c.noches, c.adultos, c.ninos, "
     "c.precio_hotel, c.precio_actividades, c.subtotal, "
     "c.descuento_porcentaje, c.descuento, c.iva_porcentaje, c.iva, "
-    "c.tasas, c.total, "
+    "c.tasas, c.total, u.nombre AS asesor, "
     "c.fecha_creacion, h.nombre AS hotel, t.tipo_habitacion, t.temporada"
 )
 _DESDE = (
@@ -18,6 +18,7 @@ _DESDE = (
     "JOIN destinos d ON d.codigo = c.destino_codigo "
     "JOIN tarifas_hotel t ON t.id_tarifa = c.id_tarifa "
     "JOIN hoteles h ON h.id_hotel = t.id_hotel "
+    "LEFT JOIN usuarios u ON u.id_usuario = c.id_usuario "
 )
 _DINERO = (
     "precio_hotel",
@@ -42,13 +43,14 @@ def guardar(cotizacion: dict, lineas: list[dict]) -> str:
                     "INSERT INTO cotizaciones (cliente_nombre, "
                     "cliente_correo, destino_codigo, fecha_entrada, "
                     "fecha_salida, noches, adultos, ninos, id_tarifa, "
+                    "id_usuario, "
                     "precio_hotel, precio_actividades, subtotal, "
                     "descuento_porcentaje, descuento, iva_porcentaje, iva, "
                     "tasas, total) "
                     "VALUES (%(cliente_nombre)s, %(cliente_correo)s, "
                     "%(destino_codigo)s, %(fecha_entrada)s, "
                     "%(fecha_salida)s, %(noches)s, %(adultos)s, %(ninos)s, "
-                    "%(id_tarifa)s, %(precio_hotel)s, "
+                    "%(id_tarifa)s, %(id_usuario)s, %(precio_hotel)s, "
                     "%(precio_actividades)s, %(subtotal)s, "
                     "%(descuento_porcentaje)s, %(descuento)s, "
                     "%(iva_porcentaje)s, %(iva)s, "

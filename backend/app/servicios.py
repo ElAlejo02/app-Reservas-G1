@@ -195,9 +195,10 @@ def calcular(solicitud: SolicitudCotizacion) -> Desglose:
     return desglose
 
 
-def crear(nueva: NuevaCotizacion) -> Cotizacion:
+def crear(nueva: NuevaCotizacion, usuario: dict) -> Cotizacion:
     desglose, lineas = _armar(nueva)
     datos = {
+        "id_usuario": usuario["id_usuario"],
         "cliente_nombre": nueva.cliente_nombre.strip(),
         "cliente_correo": nueva.cliente_correo.strip().lower(),
         "destino_codigo": nueva.destino,
