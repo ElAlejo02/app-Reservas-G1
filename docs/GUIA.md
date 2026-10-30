@@ -67,6 +67,9 @@ proyecto ADSO GRUPO 1/
 │   │   ├── esquemas.py      Forma de los datos que entran y salen
 │   │   ├── calculos.py      Las cuentas (solo matemática)
 │   │   ├── servicios.py     Las reglas del negocio
+│   │   ├── seguridad.py     Claves cifradas, tokens y permisos
+│   │   ├── autenticacion.py Registro e inicio de sesión
+│   │   ├── crear_admin.py   Crea el primer ADMIN desde la terminal
 │   │   ├── repositorios/    El SQL (único lugar con SQL)
 │   │   └── rutas/           Los endpoints que ve el frontend
 │   ├── base_datos/          Scripts para crear tablas y datos de prueba
@@ -96,6 +99,7 @@ proyecto ADSO GRUPO 1/
 
 1. `backend/base_datos/01_esquema.sql`
 2. `backend/base_datos/02_datos_prueba.sql`
+3. `backend/base_datos/03_usuarios.sql` (una sola vez; si dice *Duplicate column*, ya estaba)
 
 El segundo borra y vuelve a llenar los datos de prueba, así que se puede correr cuando quieras empezar de cero.
 
@@ -108,7 +112,21 @@ pip install -r requirements.txt
 copy .env.ejemplo .env
 ```
 
-Abre `.env` y pon en `DB_PASSWORD` la clave del usuario `hyd_app`.
+Abre `.env` y pon en `DB_PASSWORD` la clave del usuario `hyd_app`. En `JWT_SECRETO` pega un texto largo y aleatorio; lo puedes generar con:
+
+```powershell
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+Si lo dejas vacío la API funciona, pero cada vez que se reinicia todos tienen que volver a iniciar sesión.
+
+**Crear el primer administrador** (una sola vez):
+
+```powershell
+python -m app.crear_admin
+```
+
+Pide nombre, correo y clave. La clave no se ve al escribirla y nunca queda guardada en un archivo.
 
 **4.3 Arrancar la API:**
 
@@ -124,7 +142,7 @@ uvicorn app.main:app --reload
 python -m unittest -v
 ```
 
-Deben salir 28 pruebas en OK. Si MySQL está apagado, las 14 de la API se saltan y solo corren las 14 de cuentas.
+Deben salir 41 pruebas en OK. Si MySQL está apagado, las que necesitan base de datos se saltan y solo corren las de cuentas, claves y tokens.
 
 ---
 
@@ -174,8 +192,32 @@ ABIERTA ──► ENVIADA ──► APROBADA
 
 Aprobada, rechazada y anulada son finales. Si alguien intenta saltarse un paso, responde 409 con el motivo.
 
+### `seguridad.py` y `autenticacion.py`
+El login funciona como la manilla de un hotel todo incluido:
+
+1. En recepción (`POST /auth/login`) muestras tu documento (correo y clave).
+2. Te ponen una manilla (el **token**) que dice quién eres, tu rol y hasta cuándo vale (8 horas).
+3. En cada restaurante (cada endpoint protegido) solo muestras la manilla; nadie te vuelve a pedir el documento.
+
+Detalles que importan:
+
+- La clave **nunca** se guarda. Se guarda su huella con bcrypt: aunque alguien robe la tabla, no puede saber las claves.
+- El token va firmado con `JWT_SECRETO`. Si alguien le cambia una letra (por ejemplo, el rol), la firma deja de cuadrar y la API lo rechaza.
+- Si un ADMIN desactiva a un usuario, su token deja de servir de inmediato, aunque no haya vencido.
+- Si el correo no existe o la clave está mal, el mensaje es el mismo: "Correo o clave incorrectos". Así nadie puede averiguar qué correos están registrados.
+
+| Rol | Puede |
+|---|---|
+| ASESOR | Cotizar, guardar, ver y cambiar el estado de cotizaciones |
+| OPERACION | Ver cotizaciones (sin crear ni cambiar estados) |
+| ADMIN | Todo lo anterior, más ver usuarios, cambiar roles y desactivar |
+
+Quien se registra queda como ASESOR. Para subir a alguien a ADMIN u OPERACION, un ADMIN usa `PATCH /usuarios/{id}`.
+
+Cada cotización guarda quién la creó (campo `asesor` en la respuesta). Es el mismo principio del `USEREMAIL()` de AppSheet.
+
 ### `rutas/`
-Cada función es un endpoint con nombre en español y un título (`summary`) que es el que aparece como botón en `/docs`. Están agrupadas en cuatro secciones: Sistema, Catálogo, Disponibilidad y Cotizaciones.
+Cada función es un endpoint con nombre en español y un título (`summary`) que es el que aparece como botón en `/docs`. Están agrupadas en cinco secciones: Sistema, Usuarios, Catálogo, Disponibilidad y Cotizaciones.
 
 ### `main.py`
 Junta las rutas, activa CORS para la página de Laura y convierte cada error en una respuesta clara:
@@ -185,6 +227,8 @@ Junta las rutas, activa CORS para la página de Laura y convierte cada error en 
 | Datos mal escritos | 422 | Falta un campo, fecha con otro formato, descuento mayor a 15 |
 | `NoEncontradoError` | 404 | Destino o cotización que no existe |
 | `ReglaNoCumplidaError` | 409 | Tarifa que no aplica, cambio de estado no permitido |
+| `NoAutenticadoError` | 401 | Sin token, token vencido o falso, clave incorrecta |
+| `SinPermisoError` | 403 | Hay sesión, pero el rol no alcanza |
 | Sin MySQL | 503 | La base de datos está apagada |
 
 Todos responden igual: `{"detail": "mensaje en español"}`. Así Laura siempre muestra `detail` y listo.
@@ -224,15 +268,44 @@ Dirección base: `http://127.0.0.1:8000`
 | Botón en /docs | Método y ruta | Para qué |
 |---|---|---|
 | Estado del servidor | `GET /` | Saber si la API está prendida |
+| Registrar usuario | `POST /auth/registro` | Pantalla de registro |
+| Iniciar sesión | `POST /auth/login` | Pantalla de login: devuelve el token |
+| Ver mi usuario | `GET /auth/yo` (S) | Mostrar "Hola, Ana" y su rol |
+| Ver usuarios (solo ADMIN) | `GET /usuarios` (S) | Pantalla de administración |
+| Cambiar rol o activar/desactivar | `PATCH /usuarios/{id}` (S) | Botones de la pantalla de administración |
 | Ver destinos | `GET /destinos` | Llenar el selector de destino |
 | Ver hoteles | `GET /hoteles?destino=CTG` | Listado de hoteles |
 | Ver actividades con precio de venta | `GET /actividades?destino=CTG` | Casillas de actividades |
 | Buscar hoteles disponibles | `POST /disponibilidad` | Resultados de la búsqueda |
 | Calcular cotización (sin guardar) | `POST /cotizaciones/calcular` | Resumen con el total mientras se arma |
-| Guardar cotización | `POST /cotizaciones` | Guardar y obtener el código |
-| Ver cotizaciones | `GET /cotizaciones?estado=ABIERTA` | Bandeja de cotizaciones |
-| Ver una cotización | `GET /cotizaciones/COT-000001` | Detalle |
-| Cambiar estado de una cotización | `PATCH /cotizaciones/COT-000001/estado` | Botones Enviar, Aprobar, Rechazar, Anular |
+| Guardar cotización | `POST /cotizaciones` (S) | Guardar y obtener el código |
+| Ver cotizaciones | `GET /cotizaciones?estado=ABIERTA` (S) | Bandeja de cotizaciones |
+| Ver una cotización | `GET /cotizaciones/COT-000001` (S) | Detalle |
+| Cambiar estado de una cotización | `PATCH /cotizaciones/COT-000001/estado` (S) | Botones Enviar, Aprobar, Rechazar, Anular |
+
+**(S)** = necesita sesión. Lo demás (catálogo, disponibilidad y calcular) se puede usar sin iniciar sesión.
+
+**Probar los (S) en /docs:** usa *Iniciar sesión*, copia el `access_token` de la respuesta, dale al botón verde **Authorize** (arriba a la derecha), pégalo y dale *Authorize*. Desde ahí todos los botones mandan el token solos.
+
+### 7.0 Iniciar sesión
+
+Lo que se manda a `POST /auth/login`:
+
+```json
+{ "correo": "ana@hyd.com", "clave": "Clave2026" }
+```
+
+Lo que llega:
+
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIs...",
+  "token_type": "bearer",
+  "vence_en_minutos": 480,
+  "usuario": { "id_usuario": 1, "nombre": "Ana Ruiz", "correo": "ana@hyd.com",
+               "rol": "ASESOR", "activo": true, "fecha_creacion": "2026-10-30T22:00:00" }
+}
+```
 
 ### 7.1 Buscar disponibilidad
 
@@ -363,6 +436,43 @@ async function enviar(ruta, datos) {
 
 `cuerpo.detail` siempre trae un mensaje en español listo para mostrar.
 
+**Iniciar sesión y mandar el token:**
+
+```js
+async function iniciarSesion(correo, clave) {
+  const sesion = await enviar("/auth/login", { correo, clave });
+  sessionStorage.setItem("token", sesion.access_token);
+  return sesion.usuario;
+}
+
+// Para los endpoints marcados con (S) se agrega el encabezado Authorization:
+async function pedirConSesion(ruta, opciones = {}) {
+  const token = sessionStorage.getItem("token");
+  const respuesta = await fetch(`${API}${ruta}`, {
+    ...opciones,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      ...opciones.headers,
+    },
+  });
+  if (respuesta.status === 401) {
+    sessionStorage.removeItem("token");
+    location.href = "login.html"; // sesión vencida: volver al login
+    return;
+  }
+  const cuerpo = await respuesta.json();
+  if (!respuesta.ok) throw new Error(cuerpo.detail);
+  return cuerpo;
+}
+
+// Uso:
+// const bandeja = await pedirConSesion("/cotizaciones");
+// await pedirConSesion("/cotizaciones", { method: "POST", body: JSON.stringify(datos) });
+```
+
+`sessionStorage` guarda el token mientras la pestaña esté abierta; al cerrarla, se pierde y toca iniciar sesión de nuevo. Es más seguro que `localStorage` para un equipo compartido en la oficina.
+
 **Precios en pesos colombianos:**
 
 ```js
@@ -382,6 +492,7 @@ pesos.format(3306713); // "$ 3.306.713"
 
 | Pantalla | Botones |
 |---|---|
+| Login | Iniciar sesión · Registrarme · Cerrar sesión |
 | Búsqueda | Buscar hoteles disponibles |
 | Cotización | Agregar actividad · Calcular · Guardar cotización |
 | Bandeja | Ver cotización · Enviar · Aprobar · Rechazar · Anular |
@@ -393,7 +504,8 @@ pesos.format(3306713); // "$ 3.306.713"
 | Archivo | Qué prueba | Necesita MySQL |
 |---|---|---|
 | `tests/test_calculos.py` | Noches, margen, redondeo, descuento, IVA, exentos, tasas | No |
-| `tests/test_api.py` | Cada endpoint, errores 404/409/422 y el flujo de estados | Sí |
+| `tests/test_api.py` | Cada endpoint, errores 404/409/422, el flujo de estados y que no se pueda guardar sin sesión | Sí |
+| `tests/test_usuarios.py` | Claves cifradas, tokens alterados, registro, login, roles y usuarios inactivos | Las de claves y tokens no; el resto sí |
 
 Las de la API crean cotizaciones de prueba y las borran al terminar.
 
@@ -409,6 +521,9 @@ Las de la API crean cotizaciones de prueba y las borran al terminar.
 | Error de CORS en la consola del navegador | La página no está en la lista permitida | Abrirla con Live Server (puerto 5500) o agregarla a `ORIGENES_PERMITIDOS` |
 | "Internal Server Error" y en la terminal `'cryptography' package is required` | MySQL 8 usa un método de clave que PyMySQL solo entiende con esa librería | `pip install cryptography` y reiniciar uvicorn |
 | `/disponibilidad` devuelve `[]` | Fechas fuera de las temporadas cargadas, o la estadía cruza dos temporadas, o son demasiadas personas | Probar con fechas entre el 16 de enero y el 14 de junio de 2027 |
+| 401 "Debe iniciar sesión" | El endpoint está marcado con (S) y no se mandó el token | Iniciar sesión y mandar `Authorization: Bearer ...` (en /docs, botón Authorize) |
+| 401 "La sesión venció" | Pasaron las 8 horas, o se reinició la API con `JWT_SECRETO` vacío | Iniciar sesión de nuevo y poner un `JWT_SECRETO` fijo en el `.env` |
+| 403 "Esta acción es solo para..." | El rol no alcanza (por ejemplo, OPERACION intentando guardar) | Pedirle a un ADMIN que cambie el rol |
 | 409 "Esa tarifa no aplica" | Se mandó un `id_tarifa` de otra búsqueda | Volver a buscar disponibilidad |
 
 ---
@@ -417,14 +532,15 @@ Las de la API crean cotizaciones de prueba y las borran al terminar.
 
 **Próximos módulos** (en este orden, porque cada uno usa el anterior):
 
-1. **Reservas**: convertir una cotización APROBADA en reserva con código `HDMDE001`, pasajeros y un titular. Reutiliza las validaciones del módulo de pasajeros que está en `antes/`.
-2. **Novedades contables**: guardar cada cambio de una reserva (quién, cuándo, valor antes y después).
-3. **Usuarios y login** con roles ADMIN, ASESOR y OPERACIÓN.
+1. **Colección de Postman** con todos los endpoints, incluido el login (GA7-AA5-EV02 y EV04).
+2. **Reservas**: convertir una cotización APROBADA en reserva con código `HDMDE001`, pasajeros y un titular. Reutiliza las validaciones del módulo de pasajeros que está en `antes/`.
+3. **Novedades contables**: guardar cada cambio de una reserva (quién, cuándo, valor antes y después). Ya se sabe quién es gracias al login.
 
 **Pendientes conocidos del cotizador:**
 
 - Una estadía que cruza dos temporadas no aparece en la búsqueda.
 - Los catálogos (hoteles, tarifas, actividades) solo se cargan por SQL; falta la pantalla de administración.
+- El login no limita intentos fallidos; antes de publicar en internet hay que agregarlo.
 
 **Retos para practicar:**
 
@@ -439,3 +555,4 @@ Las de la API crean cotizaciones de prueba y las borran al terminar.
 | Fecha | Cambio |
 |---|---|
 | 2026-10-29 | Se mueve lo anterior a `antes/` (la entrega de la GA7-AA3 queda con la etiqueta `aa3-pasajeros`). Primera versión del cotizador: catálogo, disponibilidad, cálculo, guardado y estados de cotizaciones. 28 pruebas. |
+| 2026-10-30 | Login: tabla `usuarios`, claves con bcrypt, tokens JWT de 8 horas, roles ADMIN/ASESOR/OPERACION, `crear_admin`. Guardar, ver y cambiar estado de cotizaciones ahora piden sesión, y cada cotización guarda quién la creó. Se agrega `cryptography` para MySQL 8 y mensajes claros cuando falla la conexión. 41 pruebas. |
