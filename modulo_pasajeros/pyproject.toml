@@ -1,0 +1,17 @@
+# Configuración de Ruff, la herramienta que revisa PEP 8.
+# Ejecutar:  ruff check .
+[tool.ruff]
+line-length = 79          # PEP 8: máximo 79 caracteres por línea.
+target-version = "py310"
+
+[tool.ruff.lint]
+# E/W = pycodestyle (PEP 8), F = errores lógicos, N = nombres PEP 8,
+# I = orden de imports, D = docstrings (PEP 257), UP = sintaxis moderna.
+select = ["E", "W", "F", "N", "I", "D", "UP", "B"]
+ignore = ["D203", "D213"]  # Reglas de docstring que se contradicen.
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D102"]       # Cada prueba ya se explica con su nombre.
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"   # Estilo de docstrings Args/Returns/Raises.

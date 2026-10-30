@@ -1,0 +1,7 @@
+# Librerías externas del módulo de pasajeros.
+# Instalar con:  pip install -r requirements.txt
+# (Tkinter no se instala: viene incluido con Python en Windows.)
+
+pymysql==1.1.*        # Driver para conectarse a MySQL (como JDBC en Java)
+python-dotenv==1.*    # Lee las credenciales del archivo .env
+ruff                  # Revisa el estándar PEP 8 (opcional, para desarrollo)
