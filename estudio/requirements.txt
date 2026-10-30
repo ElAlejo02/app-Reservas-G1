@@ -1,0 +1,28 @@
+# Librerías para estudiar y construir el proyecto en Python.
+# Instalar con:  pip install -r estudio/requirements.txt
+
+# Interfaz: escritorio, web y móvil con un solo código (reemplaza Android Studio / Java Swing)
+flet[all]==1.0.*
+
+# Backend y API REST (reemplaza Servlets, JSP y Spring Boot).
+# OJO: flet-web 1.0.4 falla con FastAPI 0.145 o superior (error "openapi_prefix"),
+# por eso se fija por debajo de 0.145 mientras Flet no lo corrija.
+fastapi<0.145
+uvicorn
+jinja2
+python-multipart   # formularios HTML (Form) en FastAPI
+
+# Base de datos (reemplaza JDBC)
+sqlalchemy>=2.0
+pymysql
+pymongo
+
+# Seguridad de contraseñas
+bcrypt
+
+# Pruebas (reemplaza JUnit)
+pytest
+httpx          # cliente de pruebas de FastAPI (TestClient)
+
+# Estándar de codificación PEP 8 (GA7-AA1-EV02)
+ruff

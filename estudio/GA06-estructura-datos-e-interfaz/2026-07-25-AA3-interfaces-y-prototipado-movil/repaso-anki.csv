@@ -1,0 +1,37 @@
+#separator:semicolon
+#html:false
+#tags column:3
+¿Qué es una interfaz gráfica de usuario (frontend)?;El mediador entre la persona y la máquina: botones, etiquetas, cajas de texto e imágenes.;GA6 AA3 conceptos
+¿Qué pide la evidencia GA6-AA3-EV01?;Seleccionar y probar una herramienta de prototipado con un informe de sus funciones y un ejemplo con pantallazos.;GA6 AA3 evidencias
+¿Qué pide la evidencia GA6-AA3-EV02?;Mockups del proyecto con navegación explicada (mínimo 5, ideal unas 10 interfaces) y descripción de cada una.;GA6 AA3 evidencias
+¿Qué pide la evidencia GA6-AA3-EV03?;Llevar al menos 4 mockups a un entorno real con colores, estilos y menús, con pantallazos explicados.;GA6 AA3 evidencias
+Navegación lineal;Un paso tras otro con Siguiente y Atrás. Ejemplo: asistente de nueva reserva.;GA6 AA3 navegacion
+Navegación jerárquica;Desde un menú se entra a cada módulo y se vuelve al menú.;GA6 AA3 navegacion
+Navegación híbrida (aleatoria);Mezcla de jerárquica y lineal. Es la más usada.;GA6 AA3 navegacion
+¿Qué es la retícula en diseño?;Una cuadrícula invisible que ordena los elementos de la pantalla.;GA6 AA3 diseno
+¿Qué es un layout?;La forma en que se acomodan los elementos: vertical, horizontal, tabla o cuadrícula, absoluto.;GA6 AA3 diseno
+Layout vertical en Flet;ft.Column;GA6 AA3 flet
+Layout horizontal en Flet;ft.Row;GA6 AA3 flet
+Cuadrícula responsiva en Flet;ft.ResponsiveRow (12 columnas);GA6 AA3 flet
+Posición absoluta en Flet;ft.Stack con left y top;GA6 AA3 flet
+¿Qué es una actividad en Android Studio?;Una pantalla de la app. En Flet equivale a una ft.View con su ruta.;GA6 AA3 java-python
+¿Qué hace Gradle?;Organiza dependencias y construye el proyecto Android. En Python lo hacen pip y flet build.;GA6 AA3 java-python
+¿Qué es el SDK de Android?;El kit de librerías y herramientas para desarrollar apps Android.;GA6 AA3 android
+¿Qué API mínima recomendó el instructor y por qué?;API 21 (Android 5.0) porque funciona con casi todos los celulares actuales.;GA6 AA3 android
+¿Por qué se desordenan los botones en ConstraintLayout?;Porque no se anclaron a los bordes del contenedor o al elemento anterior.;GA6 AA3 android
+Requisitos mínimos de Android Studio según el material;Sistema de 64 bits, 8 GB de RAM y 8 GB libres en disco, pantalla de 1280 x 800.;GA6 AA3 android
+Lenguajes nativos por plataforma;Android: Java o Kotlin. iOS: Swift. Windows: C#.;GA6 AA3 plataformas
+IDE nativo por plataforma;Android Studio, Xcode y Visual Studio.;GA6 AA3 plataformas
+¿Cómo se ejecuta una app Flet en el navegador?;flet run --web archivo.py;GA6 AA3 flet
+¿Cómo se prueba una app Flet en el celular?;Instalar la app Flet en el celular y correr flet run --android archivo.py (escanear QR).;GA6 AA3 flet
+¿Cómo se genera un APK con Flet?;flet build apk;GA6 AA3 flet
+¿Qué hace page.update() en Flet?;Redibuja la pantalla con los cambios hechos a los controles.;GA6 AA3 flet
+¿Qué es MVC?;Modelo (datos), Vista (pantalla) y Controlador (reglas que conectan ambos).;GA6 AA3 poo
+Clase vs objeto;La clase es el molde (Reserva). El objeto es uno concreto hecho con el molde (HDMDE001).;GA6 AA3 poo
+¿Qué es la herencia?;Una clase hija reutiliza atributos y métodos de la madre. Ejemplo: Persona hacia Pasajero y Usuario.;GA6 AA3 poo
+Interfaz en POO;Un contrato de métodos que una clase promete cumplir. En Python: abc.ABC o typing.Protocol.;GA6 AA3 poo
+¿Qué es el diseño centrado en el usuario (DCU)?;Diseñar según lo que necesita quien usa la app: diseño conceptual, prototipo, prueba con usuarios y ajuste.;GA6 AA3 diseno
+¿Por qué usar imágenes vectoriales en móvil?;Porque escalan sin pixelarse en pantallas de distintos tamaños.;GA6 AA3 diseno
+Herramienta de prototipado gratis y liviana que usó el instructor;Dia (versión 0.97.2).;GA6 AA3 prototipado
+Herramienta de prototipado en línea con IA que mostró el instructor;draw.io (diagrams.net).;GA6 AA3 prototipado
+Herramienta de prototipado que simula navegación entre pantallas;Figma (también Balsamiq, Adobe XD y PowerPoint).;GA6 AA3 prototipado

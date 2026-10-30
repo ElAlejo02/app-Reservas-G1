@@ -1,0 +1,56 @@
+{
+  "info": {
+    "name": "Reservas HyD - API de hoteles (GA7-AA5-EV04)",
+    "description": "Recorrido de la clase: listar, actualizar, eliminar, crear y listar. En Postman: Import > este archivo. La API debe estar corriendo en http://127.0.0.1:8080",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Listar hoteles (GET, espera 200)",
+      "request": { "method": "GET", "url": "http://127.0.0.1:8080/api/hoteles" }
+    },
+    {
+      "name": "2. Consultar el hotel 1 (GET, espera 200)",
+      "request": { "method": "GET", "url": "http://127.0.0.1:8080/api/hoteles/1" }
+    },
+    {
+      "name": "3. Actualizar el hotel 1 (PUT, espera 200)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"nombre\": \"Hotel Nogal Plaza\", \"ciudad\": \"Medellín\", \"estrellas\": 4, \"tarifa_noche\": 265000}" },
+        "url": "http://127.0.0.1:8080/api/hoteles/1"
+      }
+    },
+    {
+      "name": "4. Eliminar el hotel 2 (DELETE, espera 200)",
+      "request": { "method": "DELETE", "url": "http://127.0.0.1:8080/api/hoteles/2" }
+    },
+    {
+      "name": "5. Crear un hotel (POST, espera 201)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"nombre\": \"Hotel Coral\", \"ciudad\": \"San Andrés\", \"estrellas\": 3, \"tarifa_noche\": 310000}" },
+        "url": "http://127.0.0.1:8080/api/hoteles"
+      }
+    },
+    {
+      "name": "6. Filtrar por ciudad (GET, espera 200)",
+      "request": { "method": "GET", "url": "http://127.0.0.1:8080/api/hoteles?ciudad=Medellín" }
+    },
+    {
+      "name": "7. Hotel inexistente (GET, espera 404)",
+      "request": { "method": "GET", "url": "http://127.0.0.1:8080/api/hoteles/999" }
+    },
+    {
+      "name": "8. Datos inválidos (POST, espera 422)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"nombre\": \"X\", \"ciudad\": \"Cali\", \"estrellas\": 7, \"tarifa_noche\": -5}" },
+        "url": "http://127.0.0.1:8080/api/hoteles"
+      }
+    }
+  ]
+}

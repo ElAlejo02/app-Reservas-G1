@@ -1,0 +1,14 @@
+# Configuración de Ruff (revisa el estilo PEP 8 y ordena imports).
+# Para el proyecto completo, copiar la sección [tool.ruff] al pyproject.toml de la raíz del repo.
+# Uso:  ruff check .      (muestra problemas)
+#       ruff check --fix . (corrige lo que pueda)
+#       ruff format .      (formatea el código, como el "Format" de Eclipse)
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+# E/W = PEP 8, F = errores (variables sin usar, imports faltantes), N = nombres PEP 8,
+# I = orden de imports, UP = sintaxis moderna de Python.
+select = ["E", "W", "F", "N", "I", "UP"]

@@ -1,0 +1,28 @@
+#separator:semicolon
+#html:false
+#tags column:3
+¿Qué es una aplicación stand-alone?;Una aplicación de escritorio que corre en el sistema operativo del usuario sin navegador ni servidor web para su interfaz.;GA7 AA3 conceptos
+¿Qué es Swing?;La librería gráfica de Java para ventanas, botones y tablas.;GA7 AA3 java
+¿Qué es JDBC?;La forma en que Java se conecta y envía consultas a bases de datos como MySQL.;GA7 AA3 java
+¿Por qué Java usa import en vez de cargar todas sus librerías?;Porque cargarlas todas al inicio haría el programa lento.;GA7 AA3 java
+¿Para qué sirve try-catch?;Para que un error (red, base de datos, dato mal escrito) no cierre el programa: el control pasa al bloque catch.;GA7 AA3 errores
+¿Cómo se escribe try-catch en Python?;try: ... except TipoDeError: ...;GA7 AA3 python
+¿Qué excepción sale en Python al convertir letras con int()?;ValueError (en Java NumberFormatException).;GA7 AA3 python
+¿Qué hace el bloque finally?;Se ejecuta siempre, haya error o no. Sirve para cerrar conexiones.;GA7 AA3 errores
+¿Qué reemplaza a System.out.println cuando hay formulario en Swing?;JOptionPane.showMessageDialog.;GA7 AA3 java
+¿Para qué sirven los ? en una consulta SQL?;Para pasar los datos aparte y evitar la inyección SQL (como PreparedStatement).;GA7 AA3 bd
+¿Qué cuatro botones tiene el CRUD de la clase?;Guardar, buscar, modificar y eliminar.;GA7 AA3 crud
+¿Cómo se comprueba la persistencia de los datos?;Revisando la tabla en MySQL Workbench después de cada operación.;GA7 AA3 crud
+¿De qué artefactos debe partir el código?;Diagrama de clases, casos de uso, historias de usuario, diseños y prototipos.;GA7 AA3 diseño
+¿Cómo se relaciona un caso de uso con el formulario?;Cada caso de uso se traduce en la acción de un botón. Registrar persona es el botón Guardar.;GA7 AA3 diseño
+¿La AA3-EV01 es individual o grupal?;En grupos de 3 o 4, pero cada integrante la sube con su nombre.;GA7 AA3 evidencias
+¿Cómo se nombra el ZIP de la AA3-EV01?;NOMBRE_APELLIDO_AA3_EV01 con el proyecto y el enlace del repositorio.;GA7 AA3 evidencias
+¿Qué lleva la AA3-EV02?;Un video individual y un Word con normas APA con un pantallazo por historia de usuario y las pruebas de validación.;GA7 AA3 evidencias
+¿Cómo prefiere la instructora recibir el video?;Como enlace (YouTube u otro) para no llenar su disco.;GA7 AA3 evidencias
+¿Cómo debe empezar el video?;Con un saludo, el nombre del aprendiz y la evidencia que se presenta.;GA7 AA3 evidencias
+¿Qué validaciones pide documentar la EV02?;Fechas, números, textos, caracteres especiales y longitudes.;GA7 AA3 pruebas
+¿Qué herramienta de pruebas usa Python?;pytest (en Java JUnit).;GA7 AA3 pruebas
+¿Qué hace @pytest.mark.parametrize?;Ejecuta la misma prueba con varios datos de entrada, un caso por fila.;GA7 AA3 pruebas
+¿Qué es una expresión regular?;Un patrón de texto para validar formatos, por ejemplo que un nombre solo tenga letras.;GA7 AA3 python
+¿Por qué validar_fechas recibe hoy como parámetro?;Para que las pruebas den el mismo resultado sin importar el día en que se corran.;GA7 AA3 pruebas
+¿Qué sigue después de la AA3?;Leer qué es un framework para el taller de componentes frontend (AA4) y luego servicios web (AA5).;GA7 AA3 plan

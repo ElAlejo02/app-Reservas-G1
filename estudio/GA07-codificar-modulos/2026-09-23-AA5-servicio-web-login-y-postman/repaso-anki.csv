@@ -1,0 +1,36 @@
+#separator:semicolon
+#html:false
+#tags column:3
+¿Qué es una API REST?;Un servicio que recibe peticiones HTTP en rutas (endpoints) con datos en JSON y responde con datos y un código de estado.;GA7 AA5 api
+¿Qué es un endpoint?;La ruta o puerta de un servicio de la API. Ejemplo POST /api/auth/login.;GA7 AA5 api
+¿Qué es JSON?;Un formato de texto estructurado para enviar datos. Ejemplo {"usuario": "admin"}.;GA7 AA5 api
+¿Qué es un DTO?;Un objeto de transferencia de datos que lleva solo lo necesario entre cliente y servidor.;GA7 AA5 api
+¿Cuál es la analogía del DTO en clase?;La bandeja del mesero que lleva solo lo que se pidió, no toda la despensa.;GA7 AA5 api
+¿Qué significa el código HTTP 200?;Que la petición salió bien.;GA7 AA5 http
+¿Qué significa el código HTTP 201?;Que se creó un recurso nuevo.;GA7 AA5 http
+¿Qué significa el código HTTP 401?;No autorizado: credenciales incorrectas.;GA7 AA5 http
+¿Qué significa el código HTTP 409?;Conflicto: el recurso ya existe.;GA7 AA5 http
+¿Qué significa el código HTTP 422 en FastAPI?;Que los datos enviados no cumplen lo que espera el DTO.;GA7 AA5 http
+¿Qué hace @RestController en Spring?;Declara la clase como punto de acceso que responde en JSON.;GA7 AA5 java
+¿Qué hace @RequestMapping?;Define la ruta base de las peticiones del controlador.;GA7 AA5 java
+¿Qué hace @CrossOrigin?;Permite que clientes de otro origen consuman la API sin bloqueo del navegador.;GA7 AA5 java
+¿Qué equivale a @CrossOrigin en FastAPI?;CORSMiddleware.;GA7 AA5 python
+¿Qué equivale a @RequestMapping en FastAPI?;APIRouter(prefix="/api/auth").;GA7 AA5 python
+¿Cómo se define un DTO en FastAPI?;Con una clase que hereda de BaseModel de Pydantic.;GA7 AA5 python
+¿Cómo se responde un 401 en FastAPI?;raise HTTPException(401, "mensaje").;GA7 AA5 python
+¿Dónde está la documentación automática de una API en FastAPI?;En /docs (Swagger).;GA7 AA5 python
+¿Qué es Postman?;Una herramienta para enviar peticiones a una API y ver sus respuestas.;GA7 AA5 postman
+¿Cómo se envía un JSON en Postman?;Método POST, la URL, Body, raw, JSON, escribir el cuerpo y Send.;GA7 AA5 postman
+¿Qué causó el error de conexión en Postman en clase?;Un salto de línea pegado al final de la URL.;GA7 AA5 postman
+¿Qué debe estar encendido antes de probar en Postman?;El servidor de la API (NetBeans o uvicorn).;GA7 AA5 postman
+¿Qué es una arquitectura desacoplada?;Cliente y servidor son programas separados que solo se hablan por HTTP y JSON.;GA7 AA5 arquitectura
+¿Qué hacía procesar.php en la clase?;Tomaba los datos del formulario y con cURL llamaba a la API de Spring Boot.;GA7 AA5 php
+¿Por qué se instaló PHP sin XAMPP?;Porque XAMPP usa el puerto 8080 y choca con el servidor de NetBeans.;GA7 AA5 php
+¿Qué hay que activar en php.ini para usar cURL?;Las extensiones curl y openssl quitando el punto y coma.;GA7 AA5 php
+¿Cómo se levanta un servidor simple en Python?;python -m http.server 8081.;GA7 AA5 python
+¿Por qué guardar la contraseña con hash?;Para que nadie pueda leerla aunque obtenga la base de datos.;GA7 AA5 seguridad
+¿Qué funciones de bcrypt se usan?;hashpw para guardar y checkpw para comparar.;GA7 AA5 seguridad
+¿Por qué el login no dice si falló el usuario o la clave?;Para no darle pistas a un atacante.;GA7 AA5 seguridad
+¿Qué pide la AA5-EV01?;Un servicio web de registro e inicio de sesión con comentarios y Git.;GA7 AA5 evidencias
+¿Qué pide la AA5-EV02?;Probar la API con Postman: video, pantallazos, endpoints y enlace del repositorio.;GA7 AA5 evidencias
+¿Qué piden la AA5-EV03 y EV04?;Las APIs del proyecto con su documentación y sus pruebas en Postman.;GA7 AA5 evidencias

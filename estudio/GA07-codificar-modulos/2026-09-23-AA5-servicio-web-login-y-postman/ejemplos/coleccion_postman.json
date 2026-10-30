@@ -1,0 +1,54 @@
+{
+  "info": {
+    "name": "Reservas HyD - Autenticacion (GA7-AA5)",
+    "description": "Pruebas del servicio de registro e inicio de sesion. En Postman: Import > seleccionar este archivo. La API debe estar corriendo en http://127.0.0.1:8080",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Login correcto (espera 200)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"usuario\": \"admin\", \"contrasena\": \"1234\"}" },
+        "url": "http://127.0.0.1:8080/api/auth/login"
+      }
+    },
+    {
+      "name": "2. Login con clave errada (espera 401)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"usuario\": \"admin\", \"contrasena\": \"0000\"}" },
+        "url": "http://127.0.0.1:8080/api/auth/login"
+      }
+    },
+    {
+      "name": "3. Registro de usuario nuevo (espera 201)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"usuario\": \"asesor1\", \"contrasena\": \"clave123\"}" },
+        "url": "http://127.0.0.1:8080/api/auth/registro"
+      }
+    },
+    {
+      "name": "4. Registro repetido (espera 409)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"usuario\": \"asesor1\", \"contrasena\": \"clave123\"}" },
+        "url": "http://127.0.0.1:8080/api/auth/registro"
+      }
+    },
+    {
+      "name": "5. JSON incompleto (espera 422)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"usuario\": \"admin\"}" },
+        "url": "http://127.0.0.1:8080/api/auth/login"
+      }
+    }
+  ]
+}

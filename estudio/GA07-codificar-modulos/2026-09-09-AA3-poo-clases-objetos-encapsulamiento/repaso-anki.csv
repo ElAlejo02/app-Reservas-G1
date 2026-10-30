@@ -1,0 +1,35 @@
+#separator:semicolon
+#html:false
+#tags column:3
+¿Qué es una clase?;El molde o plano que define qué datos y acciones tendrán los objetos. No ocupa memoria con datos.;GA7 AA3 poo
+¿Qué es un objeto?;La instancia concreta de una clase creada en memoria (con new en Java).;GA7 AA3 poo
+¿Qué es el estado de un objeto?;Sus atributos: las variables que guardan sus datos.;GA7 AA3 poo
+¿Qué es el comportamiento de un objeto?;Sus métodos: las acciones que puede realizar.;GA7 AA3 poo
+Da el estado y el comportamiento de una Habitacion.;Estado: número, tipo, tarifa y ocupada. Comportamiento: ocupar, liberar y cotizar.;GA7 AA3 reservas
+¿Qué es el constructor?;El método especial que inicializa el objeto al crearlo.;GA7 AA3 poo
+¿Cuáles son las reglas del constructor en Java?;Mismo nombre de la clase, sin tipo de retorno y se activa con new.;GA7 AA3 java
+¿Cómo se llama el constructor en Python?;__init__;GA7 AA3 python
+¿Qué es el encapsulamiento?;Ocultar los atributos con private y dar acceso solo con métodos públicos que validan.;GA7 AA3 poo
+¿Qué hace el setter?;Guarda o cambia el valor de un atributo y aplica reglas de seguridad.;GA7 AA3 poo
+¿Qué hace el getter?;Lee o devuelve el valor de un atributo oculto.;GA7 AA3 poo
+¿Qué significa private en Java?;Que el atributo solo se puede usar dentro de esa clase.;GA7 AA3 java
+¿Cómo se marca un atributo privado en Python?;Con un guion bajo al inicio. Ejemplo self._edad.;GA7 AA3 python
+¿Qué significa void?;Que el método hace su trabajo y no devuelve nada.;GA7 AA3 java
+¿Cuál es el equivalente de void en Python?;-> None;GA7 AA3 python
+¿Qué guarda el tipo int?;Números enteros.;GA7 AA3 tipos
+¿Qué guarda el tipo double y cuál es su equivalente en Python?;Números decimales. En Python float.;GA7 AA3 tipos
+¿Qué guarda el tipo boolean?;Verdadero o falso (true o false). En Python True o False.;GA7 AA3 tipos
+¿Qué es char y existe en Python?;Un solo carácter. En Python no existe: se usa un str de un carácter.;GA7 AA3 tipos
+¿Qué es String?;Una cadena de caracteres (texto). En Python str.;GA7 AA3 tipos
+¿Qué tipo de texto usa MySQL en vez de String?;VARCHAR.;GA7 AA3 bd
+¿Cómo se imprime en Java y en Python?;Java System.out.println(). Python print().;GA7 AA3 java
+¿Cómo se pide un dato por teclado en Java y en Python?;Java con Scanner. Python con input().;GA7 AA3 python
+¿Qué tipo devuelve input()?;Siempre str. Hay que convertirlo con int() o float().;GA7 AA3 python
+¿Cómo se crea un objeto Persona en Java y en Python?;Java new Persona("Carlos", 25). Python Persona("Carlos", 25).;GA7 AA3 python
+¿Con qué termina cada sentencia en Java?;Con punto y coma. En Python no se usa.;GA7 AA3 java
+¿Cómo se compara con nulo en Java y en Python?;Java != null. Python is not None.;GA7 AA3 python
+¿Qué es la clase Main en el ejercicio?;La que tiene el método principal (main), la puerta de entrada que ejecuta el programa.;GA7 AA3 java
+¿Cuál es la puerta de entrada en un archivo de Python?;if __name__ == "__main__":;GA7 AA3 python
+¿Cómo se organizan las evidencias de la AA3 según la instructora?;En grupos de 3 o 4, pero cada integrante sube el archivo.;GA7 AA3 evidencias
+¿Qué hay que adjuntar si la evidencia es en Python?;Pantallazos del código y de su ejecución.;GA7 AA3 evidencias
+¿Qué pidió la instructora sobre los comentarios?;Que el código tenga comentarios que expliquen cada parte, por ejemplo el rango válido de una variable.;GA7 AA3 evidencias

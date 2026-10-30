@@ -1,0 +1,38 @@
+#separator:semicolon
+#html:false
+#tags column:3
+¿Qué es un framework?;Un marco de trabajo con herramientas, reglas, librerías y arquitectura ya construidas para desarrollar más rápido y ordenado.;GA7 AA4 framework
+¿Cuál es la analogía de la instructora para un framework?;Sin framework fabricas hasta los ladrillos. Con framework compras un apartamento en obra negra y solo lo terminas.;GA7 AA4 framework
+Nombra cuatro ventajas de un framework.;Acelera el desarrollo, da seguridad, estandariza la calidad y facilita el trabajo en equipo.;GA7 AA4 framework
+¿Qué es Spring Boot?;El framework empresarial de Java para construir el backend de aplicaciones web.;GA7 AA4 java
+¿Cuál es el equivalente de Spring Boot en Python?;FastAPI (o Django si se necesita panel de administración).;GA7 AA4 python
+¿Qué es Hibernate?;Un ORM de Java que convierte tablas en objetos sin escribir SQL a mano.;GA7 AA4 java
+¿Cuál es el equivalente de Hibernate en Python?;SQLAlchemy.;GA7 AA4 python
+¿Qué es la inyección de dependencias?;Que el framework te entrega las herramientas que necesitas en vez de crearlas tú con new. En FastAPI se hace con Depends.;GA7 AA4 framework
+¿Dónde se crea un proyecto de Spring Boot?;En start.spring.io con Maven, la versión de Java y la dependencia Spring Web.;GA7 AA4 java
+¿Para qué se configura JAVA_HOME?;Para que Windows y las herramientas encuentren la instalación de Java.;GA7 AA4 java
+¿En qué puerto corre Spring Boot por defecto?;8080.;GA7 AA4 java
+¿Qué es React?;Una biblioteca de JavaScript creada por Meta para construir interfaces con componentes.;GA7 AA4 react
+¿Qué es JSX?;Una extensión de sintaxis de JavaScript que permite escribir algo parecido a HTML dentro del código.;GA7 AA4 react
+¿Diferencia entre React y JSX?;React es el motor que maneja componentes y estado. JSX es el lenguaje visual con el que se describe cómo se ve.;GA7 AA4 react
+¿Qué es un componente de clase en React?;Una clase que hereda de React.Component con this.state, setState y render.;GA7 AA4 react
+¿Qué reemplazó a los componentes de clase?;Los componentes funcionales con hooks como useState y useEffect.;GA7 AA4 react
+¿Qué hace useState?;Crea un dato de estado y la función para cambiarlo. Al cambiarlo React redibuja.;GA7 AA4 react
+¿Qué hace useEffect con []?;Ejecuta un código una sola vez cuando el componente aparece, por ejemplo cargar datos.;GA7 AA4 react
+¿Qué equivale a useEffect con [] en un componente de clase?;componentDidMount.;GA7 AA4 react
+¿Qué son las props?;Datos que un componente padre le pasa a un hijo. El hijo solo los lee.;GA7 AA4 react
+¿Para qué sirve key en una lista de React?;Para que React sepa qué elemento cambió sin redibujar todos.;GA7 AA4 react
+¿Cuándo se dispara onChange?;Cuando cambia el valor de un input o select.;GA7 AA4 eventos
+¿Cuándo se dispara onSubmit?;Cuando se envía un formulario.;GA7 AA4 eventos
+¿Para qué sirve evento.preventDefault() en onSubmit?;Para que el formulario no recargue la página.;GA7 AA4 eventos
+¿Cómo se escriben los eventos en React?;En camelCase (onClick) y reciben una función, no un texto.;GA7 AA4 eventos
+¿Qué es Vite?;La herramienta que crea el proyecto de React y lo sirve en un servidor local (puerto 5173).;GA7 AA4 react
+¿Qué comando crea un proyecto React con Vite?;npm create vite@latest nombre (elegir React y JavaScript).;GA7 AA4 react
+¿Qué se necesita instalar antes de usar React?;Node.js, que trae npm.;GA7 AA4 react
+¿Qué carpeta no se sube a Git ni en el ZIP de React?;node_modules (y dist).;GA7 AA4 react
+¿Qué es CORS?;La regla del navegador que impide a una página llamar a otro puerto o dominio si el servidor no lo permite.;GA7 AA4 web
+¿Para qué es la comilla invertida en JavaScript?;Para textos con variables. Ejemplo `Hola ${nombre}`.;GA7 AA4 javascript
+¿Diferencia entre frontend y backend?;Frontend es lo que el usuario ve en el navegador. Backend es la lógica, el servidor, la base de datos y las APIs.;GA7 AA4 web
+¿Qué preguntas tiene el taller AA4-EV01?;Diferencia entre React y JSX, clases en React, principales eventos y mapa conceptual de React.;GA7 AA4 evidencias
+¿Qué pide la AA4-EV02?;Un documento con los componentes de React del proyecto y la justificación de cada uno.;GA7 AA4 evidencias
+¿Qué pide la AA4-EV03?;Codificar en React un módulo del proyecto con comentarios, estándares y Git (ZIP sin node_modules).;GA7 AA4 evidencias

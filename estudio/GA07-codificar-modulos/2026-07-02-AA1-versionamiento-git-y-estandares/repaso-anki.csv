@@ -1,0 +1,42 @@
+#separator:semicolon
+#html:false
+#tags column:3
+¿Qué es un sistema de control de versiones?;Un programa que guarda fotos (versiones) del proyecto en una línea de tiempo para poder volver a una versión anterior.;GA7 AA1 conceptos
+¿Quién creó Git y para qué?;Linus Torvalds, para controlar el desarrollo del kernel de Linux.;GA7 AA1 conceptos
+¿Cuáles son los tres tipos de versionamiento?;Local, centralizado y distribuido.;GA7 AA1 conceptos
+¿Por qué el versionamiento distribuido es más seguro que el centralizado?;Porque cada computador tiene la copia completa del historial. Si el servidor falla no se pierde el código.;GA7 AA1 conceptos
+¿Qué diferencia hay entre Git y GitHub?;Git es el programa que versiona en tu PC. GitHub es el sitio en la nube donde se publican los repositorios para compartir.;GA7 AA1 conceptos
+Nombra tres plataformas en la nube para repositorios Git.;GitHub, GitLab y Bitbucket.;GA7 AA1 conceptos
+¿Cuáles son los tres estados de un archivo en Git?;Modificado (rojo), preparado o staged (verde) y confirmado o committed.;GA7 AA1 git
+¿Qué comando pasa un archivo de modificado a preparado?;git add archivo (o git add . para todos).;GA7 AA1 git
+¿Qué comando crea una versión?;git commit -m "mensaje".;GA7 AA1 git
+¿Qué comando muestra el historial de versiones?;git log.;GA7 AA1 git
+¿Qué comando muestra los archivos en rojo y en verde?;git status.;GA7 AA1 git
+¿Qué comando muestra qué cambió dentro de un archivo modificado?;git diff.;GA7 AA1 git
+¿Qué comando convierte una carpeta en repositorio y qué crea?;git init. Crea la carpeta oculta .git.;GA7 AA1 git
+¿Qué hay que configurar antes del primer commit?;git config --global user.name y git config --global user.email.;GA7 AA1 git
+¿Por qué usar en Git el mismo correo de la cuenta de GitHub?;Para que GitHub reconozca las versiones como tuyas y no pida autorizarlas.;GA7 AA1 git
+¿Qué hace git remote add origin url?;Conecta el repositorio local con el repositorio remoto en GitHub y le pone el nombre origin.;GA7 AA1 remoto
+¿Qué hace git remote -v?;Muestra los repositorios remotos conectados y su dirección (HTTPS o SSH).;GA7 AA1 remoto
+¿Qué hace git push -u origin main?;Sube las versiones de la rama main a origin y deja recordado el destino para usar solo git push después.;GA7 AA1 remoto
+¿Qué hace git clone url?;Descarga a tu PC un repositorio remoto con todo su historial.;GA7 AA1 remoto
+¿Qué diferencia hay entre git fetch y git pull?;fetch trae los cambios del remoto sin mezclarlos. pull los trae y los mezcla en tu rama.;GA7 AA1 remoto
+¿Qué opción de credenciales se debe elegir en Windows al hacer push?;manager (Git Credential Manager). wincred ya es obsoleto.;GA7 AA1 remoto
+¿GitHub acepta contraseña desde la consola?;No. Se autentica con el navegador o con un token o código de dispositivo.;GA7 AA1 remoto
+¿Qué es una rama (branch)?;Una línea de trabajo paralela del mismo código para trabajar sin afectar la rama principal.;GA7 AA1 git
+¿Qué es un merge?;Unir los cambios de una rama en otra después de revisarlos.;GA7 AA1 git
+¿Qué rama principal usa el repo del grupo?;main (el instructor usó master. Son equivalentes).;GA7 AA1 proyecto
+¿Para qué sirve el archivo .gitignore?;Para indicar qué archivos no se suben. Por ejemplo .venv/ y __pycache__/ y .env.;GA7 AA1 proyecto
+¿Qué piden las evidencias EV01 a EV05 de la GA7 AA1?;EV01 informe eligiendo Git. EV02 estándares de codificación. EV03 tabla Git local contra remoto. EV04 instalación con pantallazos. EV05 laboratorio en video o pantallazos.;GA7 AA1 evidencias
+¿Qué es obligatorio en la EV05 según el instructor?;La parte local con 6 o 7 comandos. La remota suma pero no es obligatoria.;GA7 AA1 evidencias
+¿Qué estándar de codificación usa Python?;PEP 8 (y PEP 257 para docstrings).;GA7 AA1 estandares
+¿Cómo se nombran las clases en Python?;PascalCase y sustantivo en singular. Ejemplo Reserva.;GA7 AA1 estandares
+¿Cómo se nombran métodos y variables en Python?;snake_case. Ejemplo calcular_total y fecha_entrada.;GA7 AA1 estandares
+¿Cómo se nombran las constantes en Python?;En MAYÚSCULAS. Ejemplo IVA = 0.19.;GA7 AA1 estandares
+¿Cómo se marca un atributo privado en Python?;Con un guion bajo al inicio (self._estado). Es una convención.;GA7 AA1 estandares
+¿Qué reemplaza al getter de Java en Python?;Una propiedad con el decorador @property.;GA7 AA1 estandares
+¿Qué herramienta revisa y formatea PEP 8 automáticamente?;Ruff (ruff check y ruff format).;GA7 AA1 estandares
+¿Qué es la composición? Da un ejemplo del sistema.;Las partes no existen sin el todo. Hotel y sus Habitaciones.;GA7 AA1 poo
+¿Qué es la agregación? Da un ejemplo del sistema.;El todo agrupa partes que existen solas. Proveedor y sus Hoteles.;GA7 AA1 poo
+¿Qué es la asociación? Da un ejemplo del sistema.;Una clase conoce o usa a otra. Reserva conoce al Usuario que la creó.;GA7 AA1 poo
+¿Qué es la herencia? Da un ejemplo del sistema.;Una clase hija reutiliza a la madre. Pasajero y Usuario heredan de Persona.;GA7 AA1 poo

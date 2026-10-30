@@ -1,0 +1,34 @@
+<!doctype html>
+<!-- Equivale al index.html de la clase: el atributo action dice a quién se envían los datos
+     (en Java, al Servlet) y method dice si se usa GET o POST. -->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reservas HyD | Ingreso</title>
+    <style>
+      body { font-family: system-ui, sans-serif; background: #f4f6fa; max-width: 720px; margin: 40px auto; padding: 0 16px; }
+      form { background: white; border: 1px solid #d5dbe5; border-radius: 12px; padding: 18px; margin-bottom: 16px; }
+      h1 { color: #1f3a5f; } input { padding: 6px; margin: 4px 0 10px; display: block; }
+      button { background: #1f3a5f; color: white; border: none; border-radius: 16px; padding: 6px 16px; }
+    </style>
+  </head>
+  <body>
+    <h1>Ingreso al sistema de reservas</h1>
+
+    <form action="/ingreso" method="get" name="formularioGet">
+      <strong>Con GET</strong> (los datos se verán en la URL)
+      <input name="usuario" placeholder="Usuario" />
+      <input name="clave" type="password" placeholder="Clave" />
+      <button type="submit">Enviar con GET</button>
+    </form>
+
+    <form action="/ingreso" method="post" name="formularioPost">
+      <strong>Con POST</strong> (los datos van ocultos en el cuerpo)
+      <input name="usuario" placeholder="Usuario" />
+      <input name="clave" type="password" placeholder="Clave" />
+      <button type="submit">Enviar con POST</button>
+    </form>
+
+    <p><a href="/ejemplos-plantilla">Ver ejemplos de expresiones, ciclos y funciones en plantillas (lo que hace JSP)</a></p>
+  </body>
+</html>

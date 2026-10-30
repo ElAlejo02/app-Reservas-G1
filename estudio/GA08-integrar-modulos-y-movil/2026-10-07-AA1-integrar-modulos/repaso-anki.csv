@@ -1,0 +1,24 @@
+#separator:semicolon
+#html:false
+#tags column:3
+¿Qué significa integrar módulos?;Unir los módulos hechos por separado (login, CRUD, frontend) en un solo sistema conectado a la base de datos.;GA8 AA1 integracion
+¿Dónde se agrega el conector de MySQL en Spring Boot?;Como dependencia en el archivo pom.xml.;GA8 AA1 java
+¿Cuál es el equivalente de pom.xml en Python?;requirements.txt (o pyproject.toml).;GA8 AA1 python
+¿Qué librerías conectan Python con MySQL?;SQLAlchemy y PyMySQL.;GA8 AA1 python
+¿Qué es AUTO_INCREMENT?;Que la base de datos asigna sola el siguiente número al id.;GA8 AA1 bd
+¿Qué ventaja tiene la base de datos sobre la lista static?;Los datos persisten aunque se reinicie el servidor.;GA8 AA1 bd
+¿Cuáles son las capas del sistema integrado?;Presentación, controladores (API), modelo y DTO, y persistencia.;GA8 AA1 arquitectura
+¿Qué patrón de arquitectura describe el proyecto?;Cliente-servidor por capas (distribuido).;GA8 AA1 arquitectura
+¿Qué hace Depends(obtener_sesion) en FastAPI?;Inyecta una sesión de base de datos en cada endpoint y la cierra al terminar.;GA8 AA1 python
+¿Qué hace sesion.refresh(objeto)?;Trae de la base de datos los valores que asignó ella, como el id autoincremental.;GA8 AA1 python
+¿Para qué sirve el ciclo de vida (lifespan) en FastAPI?;Para ejecutar código una vez al arrancar, como crear tablas y datos iniciales.;GA8 AA1 python
+¿Qué hace StaticFiles en FastAPI?;Sirve archivos HTML, CSS y JS desde el mismo servidor.;GA8 AA1 python
+¿Por qué fallaba el JavaScript en clase?;Se perdieron las comillas invertidas al copiar el código.;GA8 AA1 errores
+¿Cómo ver errores de JavaScript en el navegador?;Abrir la consola con F12.;GA8 AA1 errores
+¿Por qué las pruebas usan otra base de datos?;Para no modificar los datos reales.;GA8 AA1 pruebas
+¿En qué formato se entregan las evidencias de la GA8-AA1?;PDF con normas APA, más código fuente, compilados y URL.;GA8 AA1 evidencias
+Nombra seis secciones del PDF de la GA8-AA1.;Arquitectura, requerimientos, diagramas de clases, paquetes y componentes, seguridad, capas, navegación, pruebas, servidores y ambientes.;GA8 AA1 evidencias
+¿Qué agrega la EV02 frente a la EV01?;Actas de aprobación, ejecutables, URLs de despliegue, datos de entrada y salida por módulo y manuales técnicos.;GA8 AA1 evidencias
+¿Qué mecanismos de seguridad tiene el ejemplo?;Contraseñas con bcrypt, 401 genérico, validación con Pydantic y CORS.;GA8 AA1 seguridad
+¿Hasta cuándo hay plazo para todas las evidencias?;Hasta el 31 de octubre.;GA8 AA1 plazos
+¿Qué sigue después de integrar módulos?;El APK: desarrollo móvil (GA8-AA2).;GA8 AA1 plan

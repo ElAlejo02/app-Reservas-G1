@@ -1,0 +1,63 @@
+<!doctype html>
+<!--
+  Cliente desacoplado del servicio de autenticación (lo que en clase fue formulario.html + procesar.php).
+  En clase: el formulario enviaba a procesar.php, que con cURL llamaba a la API de Spring Boot.
+  Aquí: el navegador llama directo a la API con fetch(), enviando el JSON del DTO.
+
+  Cómo correrlo (con la API encendida en el puerto 8080):
+      python -m http.server 8081
+  y abrir http://localhost:8081/formulario_login.html
+  (equivale a "php -S localhost:8000" de la clase: un servidor aparte, por eso es "desacoplado").
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservas HyD | Iniciar sesión</title>
+    <style>
+      body { font-family: system-ui, sans-serif; background: #f4f6fa; display: grid; place-items: center; min-height: 100vh; margin: 0; }
+      form { background: white; padding: 28px; border-radius: 12px; border: 1px solid #d5dbe5; width: 300px; }
+      h1 { color: #1f3a5f; font-size: 1.3rem; margin-top: 0; }
+      label { display: block; font-size: 0.85rem; margin: 12px 0 4px; }
+      input { width: 100%; box-sizing: border-box; padding: 8px; border: 1px solid #d5dbe5; border-radius: 8px; }
+      button { margin-top: 18px; width: 100%; padding: 10px; border: none; border-radius: 20px; background: #1f3a5f; color: white; cursor: pointer; }
+      #resultado { margin-top: 14px; font-size: 0.9rem; }
+      .ok { color: #2e7d32; } .error { color: #c62828; }
+    </style>
+  </head>
+  <body>
+    <form id="login">
+      <h1>Iniciar sesión</h1>
+      <label for="usuario">Usuario</label>
+      <input id="usuario" required />
+      <label for="contrasena">Contraseña</label>
+      <input id="contrasena" type="password" required />
+      <button type="submit">Ingresar</button>
+      <p id="resultado"></p>
+    </form>
+    <script>
+      // Al enviar: empaqueta usuario y contraseña en JSON (el DTO) y llama al POST /api/auth/login.
+      document.getElementById('login').addEventListener('submit', async (evento) => {
+        evento.preventDefault()
+        const resultado = document.getElementById('resultado')
+        try {
+          const respuesta = await fetch('http://127.0.0.1:8080/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              usuario: document.getElementById('usuario').value,
+              contrasena: document.getElementById('contrasena').value,
+            }),
+          })
+          const cuerpo = await respuesta.json()
+          // Igual que el PHP de clase: se muestra el código HTTP y el mensaje del servidor.
+          resultado.className = respuesta.ok ? 'ok' : 'error'
+          resultado.textContent = `HTTP ${respuesta.status}: ${cuerpo.mensaje ?? cuerpo.detail}`
+        } catch {
+          resultado.className = 'error'
+          resultado.textContent = 'No hay conexión con la API (¿está corriendo en el puerto 8080?)'
+        }
+      })
+    </script>
+  </body>
+</html>

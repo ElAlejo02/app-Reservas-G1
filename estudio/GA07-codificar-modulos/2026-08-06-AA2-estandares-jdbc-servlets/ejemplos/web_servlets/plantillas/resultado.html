@@ -1,0 +1,19 @@
+<!doctype html>
+<!-- Lo que el Servlet respondía con PrintWriter: una página según si el ingreso fue correcto. -->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Resultado del ingreso</title>
+    <style>body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; }</style>
+  </head>
+  <body>
+    {% if correcto %}
+      <h1 style="color: #2e7d32">Ingreso exitoso</h1>
+      <p>Bienvenido, {{ usuario }}.</p>
+    {% else %}
+      <h1 style="color: #c62828">Usuario o clave incorrectos</h1>
+    {% endif %}
+    <p>Método usado: <strong>{{ metodo }}</strong></p>
+    <p><a href="/">Volver</a></p>
+  </body>
+</html>

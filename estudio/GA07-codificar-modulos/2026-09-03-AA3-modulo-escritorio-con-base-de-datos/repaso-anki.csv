@@ -1,0 +1,39 @@
+#separator:semicolon
+#html:false
+#tags column:3
+¿Qué IDE y versión de Java usó la instructora de programación?;Apache NetBeans con JDK 21.;GA7 AA3 java
+¿Por qué hay que instalar el JDK de la versión que espera el IDE?;Porque Java se compila para una versión de la máquina virtual y versiones distintas generan conflictos.;GA7 AA3 java
+¿Qué es la máquina virtual de Java (JVM)?;El programa que ejecuta el bytecode de Java y permite escribir una vez y correr en cualquier sistema operativo.;GA7 AA3 java
+¿Diferencia entre Java y JavaScript?;JavaScript corre en el navegador. Java es compilado y se usa en backend y programas de escritorio.;GA7 AA3 java
+¿Qué es un paquete en Java y su equivalente en Python?;Una carpeta que agrupa clases. En Python una carpeta con __init__.py.;GA7 AA3 poo
+¿Qué es una clase?;La plantilla que define los atributos y los métodos de los objetos.;GA7 AA3 poo
+¿Qué es un objeto?;Una instancia creada a partir de una clase con sus propios valores.;GA7 AA3 poo
+¿Qué es un atributo?;Una variable declarada a nivel de clase que guarda una característica del objeto.;GA7 AA3 poo
+¿Qué hace el constructor?;Inicializa el objeto recién creado. En Python es __init__.;GA7 AA3 poo
+¿Qué hace un getter?;Permite leer el valor de un atributo privado.;GA7 AA3 poo
+¿Qué hace un setter?;Permite modificar un atributo privado y es el lugar para validar el nuevo valor.;GA7 AA3 poo
+¿Cómo se escriben getter y setter en Python?;Con @property para leer y @atributo.setter para modificar.;GA7 AA3 python
+¿Cuándo vale la pena un setter en Python?;Cuando hay que validar o transformar el valor, si no se usa el atributo directo.;GA7 AA3 python
+¿Qué librería gráfica de Java usó la instructora?;Swing (JFrame Form en NetBeans).;GA7 AA3 swing
+¿Qué control de Swing es una caja de texto y cuál es su equivalente en Flet?;JTextField. En Flet ft.TextField.;GA7 AA3 swing
+¿Qué control usó para la edad y cuál es el equivalente en Flet?;JSpinner. En Flet un TextField con NumbersOnlyInputFilter.;GA7 AA3 swing
+¿Qué control usó para el género y cuál es el equivalente en Flet?;JComboBox. En Flet ft.Dropdown con DropdownOption.;GA7 AA3 swing
+¿Qué clase administra las filas de una JTable?;DefaultTableModel con addColumn y addRow.;GA7 AA3 swing
+¿Cuál es el equivalente de JTable en Flet?;ft.DataTable con DataColumn y DataRow.;GA7 AA3 flet
+¿Qué evento de Java equivale a on_click de Flet?;ActionPerformed del JButton.;GA7 AA3 flet
+¿Qué hay que instalar para conectar Java con MySQL?;MySQL Community Server, MySQL Workbench y el conector JDBC Connector/J.;GA7 AA3 bd
+¿Qué reemplaza a JDBC en Python?;SQLAlchemy con el driver PyMySQL.;GA7 AA3 bd
+¿Qué es el engine de SQLAlchemy?;El objeto que maneja la conexión a la base de datos. Equivale a DriverManager.getConnection.;GA7 AA3 bd
+¿Cómo se ve la URL de conexión a MySQL en SQLAlchemy?;mysql+pymysql://usuario:clave@localhost:3306/base.;GA7 AA3 bd
+¿Dónde se guarda la contraseña de la base de datos?;En una variable de entorno o archivo .env fuera de Git. Nunca en el código.;GA7 AA3 bd
+¿Qué significa CRUD?;Crear, leer (consultar), actualizar y eliminar.;GA7 AA3 bd
+¿Qué hace sesion.commit()?;Confirma los cambios en la base de datos. Sin commit no se guardan.;GA7 AA3 bd
+¿Cómo se hace un SELECT con SQLAlchemy?;sesion.scalars(select(Pasajero)).;GA7 AA3 bd
+¿Cómo se busca por llave primaria con SQLAlchemy?;sesion.get(Pasajero, documento).;GA7 AA3 bd
+¿Qué pide la guía en la AA3-EV01?;Codificar un módulo del proyecto con comentarios, estándares y Git, basado en diagramas de clases, casos de uso e historias de usuario.;GA7 AA3 evidencias
+¿Qué pide la AA3-EV02?;Un Word con normas APA y un pantallazo por historia de usuario con las pruebas de validación, más un video individual del módulo funcionando.;GA7 AA3 evidencias
+¿Qué pide la AA2 (explicada el 2026-08-06)?;Un módulo con JDBC y CRUD (EV01) y una versión web con servlets, GET, POST y JSP (EV02).;GA7 AA2 pendiente
+¿Qué equivale a servlets y JSP en Python?;FastAPI con plantillas Jinja2.;GA7 AA3 python
+¿En qué plataforma se pueden entregar las evidencias según la instructora?;En cualquier plataforma, y si no es Java hay que adjuntar pantallazos del código.;GA7 AA3 evidencias
+¿Cómo se debe llamar el ZIP de la AA3-EV01?;NOMBRE_APELLIDO_AA3_EV01 con el proyecto y un archivo con el enlace del repositorio.;GA7 AA3 evidencias
+¿Qué causó el error de compilación de la instructora?;Una llave de cierre borrada, la lección es guardar y ejecutar seguido.;GA7 AA3 errores

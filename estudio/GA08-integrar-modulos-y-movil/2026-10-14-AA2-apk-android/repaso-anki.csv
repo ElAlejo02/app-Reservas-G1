@@ -1,0 +1,32 @@
+#separator:semicolon
+#html:false
+#tags column:3
+¿Qué es Android?;Un sistema operativo de código abierto de Google para dispositivos táctiles, basado en el núcleo de Linux.;GA8 AA2 android
+¿Qué es un APK?;El paquete instalable de una app Android con el código compilado, los recursos y el manifiesto.;GA8 AA2 android
+¿A qué equivale un APK en Windows?;A un archivo .exe.;GA8 AA2 android
+¿Qué es el Android SDK?;El kit de desarrollo con herramientas, bibliotecas y emuladores para crear, compilar, probar y depurar apps.;GA8 AA2 android
+¿Qué lenguaje recomienda Google para Android?;Kotlin (Java también es compatible).;GA8 AA2 android
+¿Cuál es el IDE oficial de Android?;Android Studio, creado por Google.;GA8 AA2 ide
+¿Sobre qué IDE se construyó Android Studio?;IntelliJ IDEA.;GA8 AA2 ide
+¿Qué IDE se usaba antes de Android Studio?;Eclipse con el plugin ADT (Android Development Tools).;GA8 AA2 ide
+¿Qué es Android multiusuario?;Varios perfiles en el mismo dispositivo, cada uno con su almacenamiento y configuración, sin ver los archivos de los demás.;GA8 AA2 android
+¿Para qué sirve el perfil invitado?;Para prestar el celular sin dar acceso a los datos personales.;GA8 AA2 android
+¿Qué es el principio de mínimo privilegio?;Que cada app pida solo los permisos que necesita para limitar el daño si es vulnerada.;GA8 AA2 seguridad
+¿Cuáles son los componentes esenciales de una app Android?;Actividades, servicios, receptores de emisiones y proveedores de contenido.;GA8 AA2 android
+¿Qué es una actividad en Android?;Una pantalla de la app.;GA8 AA2 android
+¿Qué es un servicio en Android?;Una tarea que corre en segundo plano sin pantalla.;GA8 AA2 android
+¿Qué es un receptor de emisiones?;Un componente que reacciona a eventos del sistema, como batería baja.;GA8 AA2 android
+¿Qué es un proveedor de contenido?;Un componente que comparte datos entre apps.;GA8 AA2 android
+¿Qué es el AndroidManifest.xml?;El documento de identidad de la app: nombre, permisos y pantalla inicial.;GA8 AA2 android
+¿Qué método se ejecuta primero al abrir una actividad?;onCreate().;GA8 AA2 java
+¿Dónde está el diseño de la pantalla en Android Studio?;En res/layout, en un archivo XML como activity_main.xml.;GA8 AA2 android
+¿Qué plantilla de proyecto usó la instructora?;Empty Views Activity, en Java, con API 26 (Android 8.0).;GA8 AA2 clase
+¿Cómo se activa el modo desarrollador en el celular?;Tocando varias veces el número de compilación en la información del software.;GA8 AA2 celular
+¿Qué hay que activar para probar por cable?;La depuración USB en las opciones de desarrollador.;GA8 AA2 celular
+¿Cómo se prueba una app Flet en el celular sin cable?;flet run --android archivo.py y escanear el QR con la app Flet en la misma red Wi-Fi.;GA8 AA2 flet
+¿Qué comando de Flet genera el APK?;flet build apk.;GA8 AA2 flet
+¿Dónde queda el APK generado por Flet?;En la carpeta build/apk.;GA8 AA2 flet
+¿Por qué no sirve 127.0.0.1 desde el celular?;Porque es el propio celular. Hay que usar la IP del PC y arrancar la API con --host 0.0.0.0.;GA8 AA2 redes
+¿Qué pide la AA2-EV01?;Un taller con 8 preguntas sobre Android y una primera app que muestre un mensaje, en RAR con PDF y APK.;GA8 AA2 evidencias
+¿Qué pide la AA2-EV02?;Un APK con un módulo del proyecto y su documentación técnica, en RAR o ZIP con PDF y APK.;GA8 AA2 evidencias
+¿Qué sigue después del APK?;Talleres de tecnologías emergentes: video de Machine Learning y texto argumentativo de Blockchain.;GA8 AA2 plan

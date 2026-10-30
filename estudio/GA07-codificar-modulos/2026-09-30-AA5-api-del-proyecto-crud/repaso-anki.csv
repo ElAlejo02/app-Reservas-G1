@@ -1,0 +1,30 @@
+#separator:semicolon
+#html:false
+#tags column:3
+¿Qué es un endpoint?;La ruta exacta del controlador donde el cliente envía una petición HTTP al backend.;GA7 AA5 api
+¿Qué verbo HTTP se usa para listar?;GET.;GA7 AA5 http
+¿Qué verbo HTTP se usa para crear?;POST.;GA7 AA5 http
+¿Qué verbo HTTP se usa para actualizar?;PUT.;GA7 AA5 http
+¿Qué verbo HTTP se usa para eliminar?;DELETE.;GA7 AA5 http
+¿Qué verbos llevan cuerpo JSON en Postman?;POST y PUT.;GA7 AA5 postman
+¿Dónde va el id en un PUT o DELETE?;En la URL. Ejemplo /api/hoteles/1.;GA7 AA5 api
+¿Qué código responde un POST exitoso?;201 Created.;GA7 AA5 http
+¿Qué código responde la API si el id no existe?;404 Not Found.;GA7 AA5 http
+¿Qué hace @GetMapping?;Atiende peticiones GET en el controlador de Spring.;GA7 AA5 java
+¿Qué hace @PathVariable?;Toma un valor de la URL, como el id.;GA7 AA5 java
+¿Qué hace @RequestBody?;Convierte el JSON del cuerpo en un objeto Java (el DTO).;GA7 AA5 java
+¿Qué hace removeIf en Java?;Elimina de la lista los elementos que cumplen una condición.;GA7 AA5 java
+¿Qué es el simulador de persistencia?;Una lista en memoria con datos iniciales para probar sin base de datos.;GA7 AA5 api
+¿Qué pasa con los datos en memoria al reiniciar el servidor?;Se pierden y vuelven los datos iniciales.;GA7 AA5 api
+¿Cómo se declara un endpoint GET en FastAPI?;@router.get("ruta");GA7 AA5 python
+¿Cómo se toma el id de la URL en FastAPI?;Con un parámetro de la función con el mismo nombre que la parte {id} de la ruta.;GA7 AA5 python
+¿Cómo se lee un filtro ?ciudad=Medellín en FastAPI?;Con un parámetro opcional de la función: ciudad: str | None = None.;GA7 AA5 python
+¿Por qué el id lo asigna el servidor y no el cliente?;Para que no se repita ni se invente. El DTO de entrada no trae id.;GA7 AA5 diseño
+¿Para qué sirve APIRouter?;Para agrupar endpoints con un prefijo y unir varios módulos en una sola app.;GA7 AA5 python
+¿Quién es el cliente en la metáfora del restaurante?;Postman o el frontend.;GA7 AA5 metafora
+¿Quién es el mesero en la metáfora del restaurante?;La API REST.;GA7 AA5 metafora
+¿Qué es la cocina en la metáfora del restaurante?;El proyecto backend con las reglas del negocio y los datos.;GA7 AA5 metafora
+¿Qué pide la AA5-EV03?;Las APIs del proyecto con la documentación de cada servicio y el proyecto en Git.;GA7 AA5 evidencias
+¿Qué pide la AA5-EV04?;Un video en Postman explicando cada verbo, pantallazos, los endpoints y el enlace del repositorio.;GA7 AA5 evidencias
+¿Dónde está la documentación de cada servicio en FastAPI?;En /docs, generada automáticamente.;GA7 AA5 python
+¿Con qué termina la GA7?;Con la AA5-EV03 y EV04: la API del proyecto y sus pruebas en Postman.;GA7 AA5 plan

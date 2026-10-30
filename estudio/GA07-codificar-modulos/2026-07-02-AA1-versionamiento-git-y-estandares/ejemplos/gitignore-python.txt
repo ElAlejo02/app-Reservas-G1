@@ -1,0 +1,27 @@
+# Copiar este contenido a un archivo llamado .gitignore en la raíz del repo.
+# Le dice a Git qué NO versionar.
+
+# Entorno virtual (cada quien crea el suyo con: py -3 -m venv .venv)
+.venv/
+venv/
+
+# Archivos que genera Python al ejecutar
+__pycache__/
+*.pyc
+
+# Credenciales y configuración local: NUNCA a GitHub
+.env
+*.key
+
+# Builds de Flet (APK, ejecutable de Windows)
+build/
+dist/
+
+# Editores y sistema
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Bases de datos de prueba (SQLite)
+*.db

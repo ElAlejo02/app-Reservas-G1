@@ -1,0 +1,35 @@
+#separator:semicolon
+#html:false
+#tags column:3
+¿Cuáles son las tres capas del modelo MVC?;Modelo (base de datos), vista (HTML o JSP) y controlador (Servlet).;GA7 AA2 arquitectura
+¿Qué capa maneja la lógica del negocio en MVC?;El controlador (el Servlet en Java).;GA7 AA2 arquitectura
+¿Qué es JDBC?;El driver o puente que conecta una aplicación Java con un motor de base de datos.;GA7 AA2 jdbc
+¿Qué conector se descarga para MySQL?;MySQL Connector/J (opción Platform Independent).;GA7 AA2 jdbc
+¿Cómo se agrega el conector en Eclipse?;Build Path, Configure Build Path, Libraries, Add External JARs.;GA7 AA2 jdbc
+¿Qué clase de JDBC abre la conexión?;DriverManager.getConnection(url, usuario, clave).;GA7 AA2 jdbc
+¿Para qué sirve Statement?;Para crear y enviar sentencias SQL a la base de datos.;GA7 AA2 jdbc
+¿Qué es un ResultSet?;El resultado de una consulta, que se recorre fila por fila con next().;GA7 AA2 jdbc
+¿Qué diferencia hay entre executeQuery y executeUpdate?;executeQuery es para SELECT. executeUpdate es para INSERT, UPDATE y DELETE.;GA7 AA2 jdbc
+¿Por qué importa usar getInt o getString?;Porque cada columna se lee con su tipo. DESCRIBE tabla muestra los tipos.;GA7 AA2 jdbc
+¿Qué pasa con un UPDATE o DELETE sin WHERE?;Afecta todos los registros de la tabla.;GA7 AA2 sql
+¿Cuál es el equivalente de JDBC en Python?;La DB-API: sqlite3 o pymysql (cursor.execute y fetchall).;GA7 AA2 python
+¿Qué hace conexion.commit() en Python?;Confirma los cambios de INSERT, UPDATE o DELETE.;GA7 AA2 python
+¿Qué es Apache Tomcat?;Un servidor web y de aplicaciones que ejecuta Servlets y JSP.;GA7 AA2 web
+¿En qué orden se instalan las herramientas de la AA2?;Eclipse, el JDK y luego Tomcat.;GA7 AA2 instalacion
+¿Por qué el instructor usó el puerto 8082?;Porque el 8080 estaba ocupado por otro programa.;GA7 AA2 web
+¿Qué es un Servlet?;Una clase Java que extiende HttpServlet, recibe peticiones del navegador y responde. Es el controlador.;GA7 AA2 servlets
+¿Cuáles son los momentos del ciclo de vida de un Servlet?;init, service (doGet o doPost) y destroy.;GA7 AA2 servlets
+¿Cómo lee un Servlet un campo del formulario?;request.getParameter("nombre del campo").;GA7 AA2 servlets
+¿Qué diferencia hay entre GET y POST?;GET envía los datos en la URL (inseguro). POST los envía en el cuerpo (recomendado).;GA7 AA2 web
+¿Qué indican action y method en un formulario?;action es a dónde se envía y method es si va por GET o POST.;GA7 AA2 web
+¿Qué es una JSP?;Una página HTML con código Java incrustado, que funciona como vista.;GA7 AA2 jsp
+¿Para qué sirve la directiva JSP <%@ %>?;Para metadatos e imports de la página.;GA7 AA2 jsp
+¿Para qué sirve la expresión JSP <%= %>?;Para imprimir el resultado de una sola línea.;GA7 AA2 jsp
+¿Para qué sirve el scriptlet JSP <% %>?;Para escribir varias líneas de código, como un ciclo.;GA7 AA2 jsp
+¿Para qué sirve la declaración JSP <%! %>?;Para declarar variables y métodos en la página.;GA7 AA2 jsp
+¿Qué reemplaza a Servlets y JSP en Python?;FastAPI (controlador) con plantillas Jinja2 (vista).;GA7 AA2 python
+¿Cómo se escribe un ciclo en Jinja2?;{% for i in range(1, 6) %} ... {% endfor %};GA7 AA2 python
+¿Qué tipo de proyecto de Eclipse permite Servlets y JSP?;Dynamic Web Project (requiere instalar las herramientas Web y Java EE).;GA7 AA2 eclipse
+¿Qué pide la AA2-EV01?;Un módulo con conexión a la base de datos que inserte, consulte, actualice y elimine, con estándares de nombres.;GA7 AA2 evidencias
+¿Qué pide la AA2-EV02?;Un módulo web con formularios HTML, Servlets, GET, POST y JSP.;GA7 AA2 evidencias
+¿Qué va en el ZIP según el instructor?;El código, el script de la base de datos y un PDF con integrantes y pantallazos. El repositorio es opcional.;GA7 AA2 evidencias
