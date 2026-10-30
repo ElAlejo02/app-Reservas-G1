@@ -1,6 +1,8 @@
 """Configuración leída del archivo .env."""
 
+import logging
 import os
+import secrets
 from dataclasses import dataclass
 from decimal import Decimal
 
@@ -39,5 +41,16 @@ class Config:
         )
     )
 
+    # Login: con qué se firman los tokens y cuánto duran (8 h = jornada).
+    # Si el .env no trae secreto se inventa uno, pero al reiniciar la API
+    # todos los tokens dejan de servir: sirve para probar, no para usar.
+    jwt_secreto: str = os.getenv("JWT_SECRETO") or secrets.token_urlsafe(32)
+    jwt_minutos: int = int(os.getenv("JWT_MINUTOS", "480"))
+
 
 config = Config()
+
+if not os.getenv("JWT_SECRETO"):
+    logging.getLogger("uvicorn.error").warning(
+        "JWT_SECRETO vacío en .env: se usa uno temporal."
+    )

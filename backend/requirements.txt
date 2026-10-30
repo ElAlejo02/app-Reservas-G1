@@ -3,5 +3,7 @@ uvicorn[standard]>=0.30
 pymysql==1.1.*
 cryptography     # MySQL 8 la pide para validar la clave (caching_sha2)
 python-dotenv==1.*
+bcrypt>=4         # guarda las claves cifradas
+pyjwt==2.*        # tokens de sesión
 httpx            # lo usa TestClient en las pruebas
 ruff             # revisar PEP 8
