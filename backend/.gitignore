@@ -1,0 +1,14 @@
+# Credenciales: jamás al repositorio.
+.env
+
+# Archivos que Python genera solo al ejecutar.
+__pycache__/
+*.pyc
+
+# Entornos virtuales.
+.venv/
+venv/
+
+# Caché de herramientas.
+.ruff_cache/
+.pytest_cache/
