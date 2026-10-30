@@ -19,8 +19,8 @@ hotel = Hotel("Hotel Caribe", "Cartagena", "Bocagrande Cra 1", 4,
 laura = Pasajero("Laura", "Vergara", "CC", "1036000000", "2000-05-12",
                  "Colombia", True, "3001234567", "laura@correo.com")
 
-daniel = Pasajero("Daniel", "Burbano", "CC", "1036111111", "1999-08-20",
-                 "Colombia", False, "3007654321", "angel@correo.com")
+daniel = Pasajero("Alejandro", "Alzate", "CC", "1036222333", "1998-01-01",
+                 "Colombia", False, "3009998877", "alejandro@correo.com")
 
 r1 = Reserva("HDMDE001", "Medellin", "Cartagena", "2026-10-10",
              "2026-10-14", hotel)
