@@ -10,7 +10,7 @@ import warnings
 import pymysql
 
 from app.db import conectar
-from app.repositorios import cotizaciones
+from app.repositorios import cotizaciones, usuarios
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
@@ -27,6 +27,9 @@ def hay_base_de_datos() -> bool:
         return False
 
 
+CORREO = "asesor.prueba@hyd.test"
+CLAVE = "Prueba2026"
+
 BUSQUEDA = {
     "destino": "CTG",
     "fecha_entrada": "2027-02-10",
@@ -42,11 +45,21 @@ class PruebasApi(unittest.TestCase):
     def setUpClass(cls):
         cls.api = TestClient(app)
         cls.creadas = []
+        usuarios.borrar(CORREO)
+        cls.api.post(
+            "/auth/registro",
+            json={"nombre": "Asesor Prueba", "correo": CORREO, "clave": CLAVE},
+        )
+        sesion = cls.api.post(
+            "/auth/login", json={"correo": CORREO, "clave": CLAVE}
+        ).json()
+        cls.auth = {"Authorization": f"Bearer {sesion['access_token']}"}
 
     @classmethod
     def tearDownClass(cls):
         for codigo in cls.creadas:
             cotizaciones.borrar(codigo)
+        usuarios.borrar(CORREO)
 
     def _solicitud(self, **cambios):
         opciones = self.api.post("/disponibilidad", json=BUSQUEDA).json()
@@ -68,7 +81,9 @@ class PruebasApi(unittest.TestCase):
             "cliente_nombre": "Agencia de Prueba",
             "cliente_correo": "Prueba@Correo.com",
         }
-        respuesta = self.api.post("/cotizaciones", json=datos)
+        respuesta = self.api.post(
+            "/cotizaciones", json=datos, headers=self.auth
+        )
         self.assertEqual(respuesta.status_code, 201, respuesta.text)
         self.creadas.append(respuesta.json()["codigo"])
         return respuesta.json()
@@ -106,7 +121,9 @@ class PruebasApi(unittest.TestCase):
         self.assertEqual(respuesta.status_code, 404)
 
     def test_calcular_no_guarda(self):
-        antes = len(self.api.get("/cotizaciones?limite=200").json())
+        antes = len(
+            self.api.get("/cotizaciones?limite=200", headers=self.auth).json()
+        )
         respuesta = self.api.post(
             "/cotizaciones/calcular", json=self._solicitud()
         )
@@ -119,7 +136,9 @@ class PruebasApi(unittest.TestCase):
             + desglose["iva"]
             + desglose["tasas"],
         )
-        despues = len(self.api.get("/cotizaciones?limite=200").json())
+        despues = len(
+            self.api.get("/cotizaciones?limite=200", headers=self.auth).json()
+        )
         self.assertEqual(antes, despues)
 
     def test_tarifa_de_otro_destino(self):
@@ -146,27 +165,47 @@ class PruebasApi(unittest.TestCase):
         self.assertRegex(guardada["codigo"], r"^COT-\d{6}$")
         self.assertEqual(guardada["estado"], "ABIERTA")
         self.assertEqual(guardada["cliente_correo"], "prueba@correo.com")
-        consultada = self.api.get(f"/cotizaciones/{guardada['codigo']}")
+        self.assertEqual(guardada["asesor"], "Asesor Prueba")
+        consultada = self.api.get(
+            f"/cotizaciones/{guardada['codigo']}", headers=self.auth
+        )
         self.assertEqual(consultada.json()["desglose"], guardada["desglose"])
 
+    def test_guardar_sin_sesion(self):
+        datos = {
+            **self._solicitud(),
+            "cliente_nombre": "Sin Sesion",
+            "cliente_correo": "a@b.com",
+        }
+        respuesta = self.api.post("/cotizaciones", json=datos)
+        self.assertEqual(respuesta.status_code, 401)
+
     def test_cotizacion_inexistente(self):
-        respuesta = self.api.get("/cotizaciones/COT-999999")
+        respuesta = self.api.get("/cotizaciones/COT-999999", headers=self.auth)
         self.assertEqual(respuesta.status_code, 404)
 
     def test_flujo_de_estados(self):
         codigo = self._guardar()["codigo"]
         ruta = f"/cotizaciones/{codigo}/estado"
-        saltar = self.api.patch(ruta, json={"estado": "APROBADA"})
+        saltar = self.api.patch(
+            ruta, json={"estado": "APROBADA"}, headers=self.auth
+        )
         self.assertEqual(saltar.status_code, 409)
         for estado in ("ENVIADA", "APROBADA"):
-            respuesta = self.api.patch(ruta, json={"estado": estado})
+            respuesta = self.api.patch(
+                ruta, json={"estado": estado}, headers=self.auth
+            )
             self.assertEqual(respuesta.json()["estado"], estado)
-        final = self.api.patch(ruta, json={"estado": "ANULADA"})
+        final = self.api.patch(
+            ruta, json={"estado": "ANULADA"}, headers=self.auth
+        )
         self.assertEqual(final.status_code, 409)
 
     def test_listar_filtra_por_estado(self):
         self._guardar()
-        abiertas = self.api.get("/cotizaciones?estado=ABIERTA").json()
+        abiertas = self.api.get(
+            "/cotizaciones?estado=ABIERTA", headers=self.auth
+        ).json()
         self.assertTrue(all(c["estado"] == "ABIERTA" for c in abiertas))
 
 
