@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoteles y Destinos</title>
+</head>
+</div>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo1.png" alt="logo">
+        </div>
+        <nav>
+            <ul class="links">
+                <li><a href="viajes.html">viajes</a></li>
+                <li><a href="Vuelos.html">Vuelos y estadía</a></li>
+                <li><a href="Tours.html">Tours</a> </li>
+                <li><a href="Blogs.html">Blogs</a></li>
+            </ul>
+        </nav>
+        <a href=""class="contact"><button>Registrate</button></a>
+    </header>
+</body>
+<p>
+    <input type="date" name="date" id="Seleccione origen">
+</p>
+</html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de vuelos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<section class="flight-container">
+
+    <div class="flight-tab">Vuelos</div>
+
+    <div class="flight-box">
+
+        <div class="flight-options">
+            <label>
+                <input type="radio" name="trip" value="oneway">
+                Sólo ida
+            </label>
+
+            <label>
+                <input type="radio" name="trip" value="roundtrip" checked>
+                Ida y vuelta
+            </label>
+
+            <select class="promo">
+                <option>Código promocional</option>
+            </select>
+        </div>
+
+        <form class="flight-form">
+
+            <div class="field">
+                <label>Desde*</label>
+                <div class="input-box">
+                    <input type="text" placeholder="Seleccione origen">
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Hacia*</label>
+                <div class="input-box">
+                    <input type="text" placeholder="Seleccione destino">
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Fecha de ida*</label>
+                <div class="input-box date-box">
+                    <input type="date" aria-label="Fecha de ida">
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Fecha de regreso*</label>
+                <div class="input-box date-box">
+                    <input type="date" aria-label="Fecha de regreso">
+                </div>
+            </div>
+
+            <div class="field passengers">
+                <label>Pasajeros</label>
+                <div class="input-box">
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="search-button">
+                Buscar
+            </button>
+
+        </form>
+    </div>
+</section>
+
+</body>
+</html>
