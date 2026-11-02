@@ -1,9 +1,6 @@
 -- =====================================================================
 -- 02_datos_prueba.sql: datos inventados para probar el cotizador.
--- Los hoteles y precios NO son reales. Las tasas por destino son de
--- ejemplo y hay que confirmarlas con operaciones antes de usarlas.
--- Se puede correr varias veces: primero limpia y luego vuelve a llenar.
--- =====================================================================
+
 
 SET NAMES utf8mb4;
 USE reservas_hyd;
