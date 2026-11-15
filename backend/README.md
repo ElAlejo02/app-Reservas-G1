@@ -14,5 +14,14 @@ python -m unittest -v           # pruebas
 Antes de arrancar, correr en MySQL `base_datos/01_esquema.sql` y luego
 `base_datos/02_datos_prueba.sql`.
 
+## Módulo de consola: gestión de hoteles (GA7-AA2-EV01)
+
+CRUD de la tabla `hoteles` con SQL directo (PyMySQL, el equivalente de
+JDBC). Usa el mismo `.env` y la misma base `reservas_hyd`.
+
+```powershell
+python -m gestion_hoteles
+```
+
 Todo lo demás (cómo está hecho, las cuentas, qué endpoints hay y cómo
 usarlos desde el frontend) está en [docs/GUIA.md](../docs/GUIA.md).
