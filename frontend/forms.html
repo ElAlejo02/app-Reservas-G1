@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso y Registro - Hoteles y Destinos</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/forms.css">
+</head>
+<body>
+
+    <!-- Enlace discreto para regresar al inicio sin recargar visualmente la pantalla -->
+    <nav class="barra-volver">
+        <a href="index.html">← Volver al inicio</a>
+    </nav>
+
+    <main class="auth-contenedor">
+        <div class="auth-tarjeta">
+            <!-- Franja superior decorativa en tono dorado cálido -->
+            <div class="franja-superior"></div>
+
+            <div class="auth-cuerpo">
+                <!-- Identidad de marca en texto limpio -->
+                <div class="marca-texto">
+                    <span class="marca-titulo">HOTELES Y DESTINOS</span>
+                    <span class="marca-subtitulo">COLOMBIA</span>
+                </div>
+
+                <!-- Aviso automático si el usuario viene de seleccionar un viaje en Vuelos.html -->
+                <div id="resumen-reserva-pendiente" class="caja-reserva" style="display: none;"></div>
+
+                <!-- FORMULARIO 1: INGRESA TU USUARIO (Estilo limpio como tu referencia) -->
+                <form id="form-login" class="formulario-activo">
+                    <h1>Ingresa tu usuario</h1>
+                    <p class="descripcion">Si ya tienes una cuenta con nosotros, ingresa tus datos para continuar:</p>
+
+                    <div class="grupo-campo">
+                        <input type="text" id="login-usuario" placeholder="Correo electrónico o número de documento" required>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <input type="password" id="login-password" placeholder="Contraseña" required>
+                    </div>
+
+                    <button type="submit" class="btn-principal">Continuar</button>
+
+                    <button type="button" id="btn-ir-registro" class="btn-secundario">
+                        Crear cuenta
+                    </button>
+                </form>
+
+                <!-- FORMULARIO 2: CREAR CUENTA NUEVA (Se muestra al hacer clic en "Crear cuenta") -->
+                <form id="form-registro" style="display: none;">
+                    <h1>Crea tu cuenta</h1>
+                    <p class="descripcion">Regístrate para gestionar tus reservas y recibir tarifas exclusivas:</p>
+
+                    <div class="grupo-campo">
+                        <input type="text" id="reg-nombre" placeholder="Nombre completo" required>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <input type="text" id="reg-documento" placeholder="Número de cédula o pasaporte" required>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <input type="email" id="reg-correo" placeholder="Correo electrónico" required>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <input type="tel" id="reg-telefono" placeholder="Teléfono de contacto" required>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <input type="password" id="reg-password" placeholder="Crea una contraseña" required>
+                    </div>
+
+                    <button type="submit" class="btn-principal">Registrarme y continuar</button>
+
+                    <button type="button" id="btn-ir-login" class="btn-secundario">
+                        Ya tengo cuenta, ingresar
+                    </button>
+                </form>
+
+                <!-- Mensaje de confirmación en pantalla -->
+                <div id="mensaje-estado" class="mensaje-estado" style="display: none;"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="JS/forms.js"></script>
+</body>
+</html>

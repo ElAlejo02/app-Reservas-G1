@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuelos y Estadía - Hoteles y Destinos</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/vuelos.css">
+</head>
+<body>
+
+    <!-- SECCIÓN 1: VIDEO DE ANCHO COMPLETO -->
+    <section class="hero-video-section">
+        <video class="video-fondo" autoplay muted loop playsinline>
+            <source src="IMG/video principal.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+
+        <header class="header">
+            <div class="logo">
+                <a href="index.html"><img src="IMG/logo1.png" alt="Logo Hoteles y Destinos"></a>
+            </div>
+            <nav>
+                <ul class="links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="viajes.html">Viajes</a></li>
+                    <li><a href="Tours.html">Tours</a></li>
+                    <li><a href="Blogs.html">Blogs</a></li>
+                </ul>
+            </nav>
+            <a href="forms.html" class="contact"><button>Regístrate</button></a>
+        </header>
+
+        <div class="hero-frase">
+            <h1>"Aléjate de tu propio mundo y atrévete a conocer el mundo que te rodea"</h1>
+            <p>Encuentra las mejores rutas, hospedajes y paquetes en toda Colombia</p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: BUSCADOR INTELIGENTE -->
+    <main class="buscador-seccion">
+        <div class="buscador-wrapper">
+            
+            <!-- 4 Pestañas exactas según tu regla de negocio -->
+            <div class="tabs-header">
+                <button type="button" class="tab-btn active" data-tab="vuelos">Vuelos</button>
+                <button type="button" class="tab-btn" data-tab="autobus">Autobús</button>
+                <button type="button" class="tab-btn" data-tab="alojamientos">Alojamientos</button>
+                <button type="button" class="tab-btn" data-tab="paquetes">
+                    <span class="badge-ahorra">Descuento</span>
+                    Arma tu viaje
+                </button>
+            </div>
+
+            <div class="buscador-card">
+                <div class="info-dinamica">
+                    <h2 id="titulo-categoria">Reserva tu vuelo al mejor precio</h2>
+                    <p id="subtitulo-categoria">Recuerda que pueden elegir hasta 12 personas por reserva.</p>
+                </div>
+
+                <!-- Opciones superiores (Se ocultan automáticamente en Alojamientos) -->
+                <div class="opciones-superiores" id="opciones-trayecto">
+                    <label><input type="radio" name="trip" value="roundtrip" checked> Ida y vuelta</label>
+                    <label><input type="radio" name="trip" value="oneway"> Sólo ida</label>
+                    
+                    <!-- Selector exclusivo para "Arma tu viaje" -->
+                    <div id="selector-transporte-paquete" style="display: none;">
+                        <label for="medio-transporte">Medio de transporte: </label>
+                        <select id="medio-transporte" class="select-pasajeros">
+                            <option value="Vuelo">Vuelo + Alojamiento (15% DTO)</option>
+                            <option value="Autobús">Autobús + Alojamiento (20% DTO)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Formulario adaptable -->
+                <form class="buscador-form" id="form-busqueda">
+                    <!-- Campo Origen (Se oculta en Alojamientos) -->
+                    <div class="campo" id="campo-origen">
+                        <label for="input-origen" id="label-origen">Origen*</label>
+                        <input type="text" id="input-origen" placeholder="Ej. Medellín" required>
+                    </div>
+
+                    <!-- Campo Destino -->
+                    <div class="campo">
+                        <label for="input-destino">Destino*</label>
+                        <input type="text" id="input-destino" placeholder="Ej. Amazonas, Chocó, Sucre..." required>
+                    </div>
+
+                    <!-- Fecha de Ida / Llegada -->
+                    <div class="campo">
+                        <label for="fecha-ida" id="label-ida">Fecha de ida*</label>
+                        <input type="date" id="fecha-ida" required>
+                    </div>
+
+                    <!-- Fecha de Vuelta / Salida -->
+                    <div class="campo">
+                        <label for="fecha-vuelta" id="label-vuelta">Fecha de vuelta*</label>
+                        <input type="date" id="fecha-vuelta">
+                    </div>
+
+                    <!-- Campo numérico libre para Pasajeros o Personas -->
+                    <div class="campo">
+                        <label for="input-personas" id="label-personas">Pasajeros (máx. 12)*</label>
+                        <input type="number" id="input-personas" min="1" max="12" value="1" required>
+                    </div>
+
+                    <button type="submit" class="btn-buscar" id="btn-buscar-texto">
+                        Buscar vuelos
+                    </button>
+                </form>
+
+                <!-- Aquí aparecerán los resultados reales según lo que el usuario ingrese -->
+                <div id="contenedor-resultados" class="resultados-lista"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="JS/vuelos.js"></script>
+</body>
+</html>

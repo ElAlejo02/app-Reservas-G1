@@ -1,0 +1,240 @@
+/* Reset general para eliminar márgenes blancos en toda la página */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #101f17;
+    color: #ffffff;
+}
+
+/* ================= 1. IMAGEN PRINCIPAL DE ANCHO COMPLETO ================= */
+.hero-banner {
+    position: relative;
+    width: 100%;
+    height: 92vh; /* Ocupa casi toda la pantalla de inicio sin dejar espacios */
+    /* Cambia 'foto principal.jpg' por cualquier imagen horizontal que desees */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(16, 31, 23, 0.95) 100%),
+                url('../IMG/foto principal.jpg') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* ================= 2. MENÚ DE NAVEGACIÓN ARRIBA Y ADENTRO ================= */
+.header {
+    width: 100%;
+    height: 85px;
+    padding: 0 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(15, 35, 25, 0.45); /* Fondo cristal oscuro */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.header .logo img {
+    height: 60px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.header .logo img:hover {
+    transform: scale(1.1);
+}
+
+.header .links {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+}
+
+.header .links a {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s ease;
+}
+
+/* Línea dorada animada al pasar el mouse por el menú */
+.header .links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2.5px;
+    background-color: #ffd166;
+    transition: width 0.3s ease;
+}
+
+.header .links a:hover {
+    color: #ffd166; /* Color dorado que resalta sobre paisajes */
+}
+
+.header .links a:hover::after {
+    width: 100%;
+}
+
+.header .contact button {
+    font-weight: 700;
+    font-size: 15px;
+    color: #101f17;
+    padding: 10px 26px;
+    background-color: #ffd166; /* Botón dorado llamativo */
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 209, 102, 0.35);
+    transition: all 0.3s ease;
+}
+
+.header .contact button:hover {
+    background-color: #ffffff;
+    transform: scale(1.06);
+}
+
+/* Texto central sobre la imagen principal */
+.hero-contenido {
+    text-align: center;
+    padding: 0 10% 70px 10%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.hero-contenido h1 {
+    font-size: 3.1rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #ffffff;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+    margin-bottom: 14px;
+}
+
+.hero-contenido p {
+    font-size: 1.15rem;
+    color: #e9f5db;
+    font-weight: 400;
+}
+
+/* ================= 3. SECCIÓN INFERIOR: IMAGEN + TÍTULO + CONTENEDORES ================= */
+.seccion-destinos {
+    width: 100%;
+    min-height: 95vh;
+    padding: 70px 7%;
+    /* Segunda imagen horizontal de fondo */
+    background: linear-gradient(rgba(16, 35, 24, 0.72), rgba(16, 35, 24, 0.85)),
+                url('../IMG/amazonas.jpg') center/cover no-repeat fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Título en cápsula encima de los contenedores */
+.titulo-seccion {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: #ffd166;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1.5px solid rgba(255, 209, 102, 0.6);
+    padding: 10px 36px;
+    border-radius: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+}
+
+/* Cuadrícula de contenedores */
+.contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 26px;
+    width: 100%;
+    max-width: 1250px;
+}
+
+/* Cada contenedor individual sobre la imagen */
+.tarjeta {
+    background: rgba(45, 78, 56, 0.78);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 18px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.tarjeta:hover {
+    transform: translateY(-8px);
+    border-color: #ffd166;
+}
+
+/* Enlace superior de cada tarjeta */
+.tarjeta-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.14);
+    padding: 9px 14px;
+    border-radius: 25px;
+    color: #ffd166;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    margin-bottom: 14px;
+    transition: background 0.3s ease;
+}
+
+.tarjeta-cabecera:hover {
+    background: #ffd166;
+    color: #101f17;
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 155px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+/* Lista de características dentro de cada contenedor */
+.tarjeta ul {
+    list-style: none;
+    text-align: center;
+}
+
+.tarjeta ul li {
+    font-size: 0.9rem;
+    color: #f1faee;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tarjeta ul li:last-child {
+    border-bottom: none;
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+    .header {
+        padding: 0 4%;
+    }
+    .header .links {
+        display: none;
+    }
+    .hero-contenido h1 {
+        font-size: 2rem;
+    }
+}
