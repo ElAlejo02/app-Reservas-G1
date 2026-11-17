@@ -57,4 +57,22 @@ formRegistro.addEventListener("submit", (e) => {
     mensajeEstado.innerHTML = `Cuenta creada con éxito para <strong>${nombre}</strong>. Hemos enviado los detalles a <strong>${correo}</strong>.`;
     
     localStorage.removeItem("reservaPendiente");
+});// 4. Procesar envío de Inicio de Sesión
+formLogin.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const usuario = document.getElementById("login-usuario").value.trim();
+
+    // Guardamos la sesión activa para que cotizador.html deje entrar al asesor
+    localStorage.setItem("token", "sesion-activa");
+    localStorage.setItem("usuarioActivo", JSON.stringify({ nombre: usuario, rol: "ASESOR" }));
+
+    mensajeEstado.style.display = "block";
+    mensajeEstado.innerHTML = `Bienvenido de nuevo, <strong>${usuario}</strong>. Ingresando al módulo de cotizaciones...`;
+    
+    localStorage.removeItem("reservaPendiente");
+
+    // Redirige a la página de cotizaciones después de 1 segundo
+    setTimeout(() => {
+        window.location.href = "cotizador.html";
+    }, 1000);
 });

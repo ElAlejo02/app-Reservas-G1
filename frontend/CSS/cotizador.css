@@ -1,0 +1,309 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top left, #1e3a2b 0%, #101f17 55%, #0a140f 100%);
+    color: #f1faee;
+    min-height: 100vh;
+}
+
+/* Barra superior con tu identidad de marca */
+.topbar {
+    background: rgba(15, 35, 25, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 209, 102, 0.25);
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar-marca h1 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffd166;
+    letter-spacing: 0.5px;
+}
+
+.topbar-marca span {
+    font-size: 0.8rem;
+    color: #a3b18a;
+}
+
+.topbar-usuario {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 0.9rem;
+}
+
+.btn-inicio {
+    color: #f1faee;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.25s;
+}
+
+.btn-inicio:hover {
+    color: #ffd166;
+}
+
+.btn-salir {
+    background-color: transparent;
+    color: #ffd166;
+    border: 1.5px solid #ffd166;
+    padding: 7px 16px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.btn-salir:hover {
+    background-color: #ffd166;
+    color: #101f17;
+}
+
+/* Cuadrícula de trabajo de 2 columnas (Izquierda: Formulario | Derecha: Liquidación) */
+.workspace {
+    max-width: 1260px;
+    margin: 35px auto;
+    padding: 0 25px;
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+.panel-card {
+    background-color: #16291f;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 209, 102, 0.22);
+    border-top: 5px solid #ffd166;
+}
+
+.panel-card h2 {
+    font-size: 1.25rem;
+    color: #ffd166;
+    padding-bottom: 12px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.fila-dos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+}
+
+.campo label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #cbd5c0;
+    margin-bottom: 6px;
+}
+
+.campo input, .campo select {
+    padding: 12px 14px;
+    background-color: #101f17;
+    border: 1.5px solid #344e41;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.25s;
+}
+
+.campo input:focus, .campo select:focus {
+    border-color: #ffd166;
+}
+
+.btn-secundario {
+    width: 100%;
+    padding: 12px;
+    background-color: rgba(255, 209, 102, 0.12);
+    color: #ffd166;
+    border: 1.5px solid rgba(255, 209, 102, 0.5);
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.btn-secundario:hover {
+    background-color: rgba(255, 209, 102, 0.25);
+}
+
+.caja-actividades {
+    background-color: #101f17;
+    border: 1px solid #344e41;
+    border-radius: 10px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-actividad {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: #f1faee;
+    cursor: pointer;
+}
+
+.separador-cliente {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.18);
+}
+
+.separador-cliente h3 {
+    font-size: 0.98rem;
+    color: #ffd166;
+    margin-bottom: 14px;
+}
+
+.campo-archivo {
+    background-color: #101f17;
+    border: 1px dashed #344e41;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 0.82rem;
+    color: #cbd5c0;
+}
+
+/* Botón principal de acción (Calcular Liquidación) */
+.btn-verde {
+    width: 100%;
+    padding: 15px;
+    background-color: #2d6a4f;
+    color: #ffffff;
+    border: 1px solid #52b788;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+
+.btn-verde:hover {
+    background-color: #40916c;
+}
+
+/* Panel derecho de liquidación */
+.estado-vacio {
+    padding: 70px 20px;
+    text-align: center;
+    color: #849689;
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.resumen-cabecera {
+    background-color: #101f17;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    margin-bottom: 18px;
+    border-left: 4px solid #ffd166;
+    line-height: 1.5;
+}
+
+.lista-valores {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.lista-valores li {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.92rem;
+    color: #cbd5c0;
+}
+
+.lista-valores li strong {
+    color: #ffffff;
+}
+
+.total-destacado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-top: 2px solid rgba(255, 209, 102, 0.35);
+    margin-bottom: 20px;
+}
+
+.total-destacado span {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #ffd166;
+}
+
+.total-destacado strong {
+    font-size: 1.5rem;
+    color: #ffd166;
+}
+
+/* Botón Confirmar y Guardar Reserva */
+.btn-azul {
+    width: 100%;
+    padding: 15px;
+    background-color: #ffd166;
+    color: #101f17;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background-color 0.25s, transform 0.2s;
+}
+
+.btn-azul:hover {
+    background-color: #ffdf8e;
+    transform: translateY(-1px);
+}
+
+.btn-azul:disabled {
+    background-color: #344e41;
+    color: #849689;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Banner de confirmación exitosa */
+.alerta-exito {
+    margin-top: 18px;
+    padding: 15px;
+    background-color: rgba(45, 106, 79, 0.4);
+    border: 1px solid #52b788;
+    color: #d8f3dc;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+}
