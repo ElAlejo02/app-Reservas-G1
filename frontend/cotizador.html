@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Cotizaciones Mayorista - Hoteles y Destinos</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/cotizador.css">
+</head>
+<body>
+
+    <!-- Encabezado corporativo superior (Mockup 2) -->
+    <header class="topbar">
+        <div class="topbar-marca">
+            <h1>Hoteles y Destinos</h1>
+            <span>Módulo de Cotizaciones Mayorista</span>
+        </div>
+        <div class="topbar-usuario">
+            <span id="info-asesor">Asesor: Cargando...</span>
+            <a href="index.html" class="btn-inicio">Sitio Público</a>
+            <button type="button" id="btn-cerrar-sesion" class="btn-salir">Cerrar Sesión</button>
+        </div>
+    </header>
+
+    <!-- Contenedor principal de 2 columnas (Izquierda: Formulario | Derecha: Liquidación) -->
+    <main class="workspace">
+        
+        <!-- COLUMNA IZQUIERDA: FORMULARIO DE NUEVA COTIZACIÓN -->
+        <section class="panel-card">
+            <h2>Nueva Cotización / Reserva</h2>
+
+            <form id="form-cotizacion">
+                <!-- Paso 1: Destino y Fechas -->
+                <div class="fila-dos">
+                    <div class="campo">
+                        <label for="destino">Destino*</label>
+                        <select id="destino" required>
+                            <option value="">Cargando destinos...</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="descuento">Descuento (%)</label>
+                        <input type="number" id="descuento" min="0" max="15" value="0">
+                    </div>
+                </div>
+
+                <div class="fila-dos">
+                    <div class="campo">
+                        <label for="fecha-entrada">Fecha de Entrada (Check-In)*</label>
+                        <input type="date" id="fecha-entrada" required>
+                    </div>
+                    <div class="campo">
+                        <label for="fecha-salida">Fecha de Salida (Check-Out)*</label>
+                        <input type="date" id="fecha-salida" required>
+                    </div>
+                </div>
+
+                <div class="fila-dos">
+                    <div class="campo">
+                        <label for="adultos">Cantidad de Adultos*</label>
+                        <input type="number" id="adultos" min="1" max="10" value="2" required>
+                    </div>
+                    <div class="campo">
+                        <label for="ninos">Cantidad de Niños</label>
+                        <input type="number" id="ninos" min="0" max="10" value="0">
+                    </div>
+                </div>
+
+                <!-- Botón para consultar hoteles disponibles en MySQL -->
+                <button type="button" id="btn-buscar-hoteles" class="btn-secundario">
+                    1. Consultar Hoteles y Tarifas Disponibles
+                </button>
+
+                <!-- Paso 2: Selección de Acomodación (se llena desde /disponibilidad) -->
+                <div class="campo" style="margin-top: 16px;">
+                    <label for="tarifa-hotel">Tipo de Acomodación / Hotel Disponible*</label>
+                    <select id="tarifa-hotel" required>
+                        <option value="">Primero consulta disponibilidad arriba...</option>
+                    </select>
+                </div>
+
+                <!-- Paso 3: Actividades / Planes adicionales del destino -->
+                <div class="campo">
+                    <label>Actividades y Tours Adicionales (Opcional)</label>
+                    <div id="lista-actividades" class="caja-actividades">
+                        <small>Selecciona un destino para ver sus actividades disponibles.</small>
+                    </div>
+                </div>
+
+                <!-- Datos del Cliente Final para guardar la cotización -->
+                <div class="separador-cliente">
+                    <h3>Datos del Cliente / Agencia</h3>
+                    <div class="fila-dos">
+                        <div class="campo">
+                            <label for="cliente-nombre">Nombre del Cliente*</label>
+                            <input type="text" id="cliente-nombre" placeholder="Ej. Agencia Viajes del Sol" required>
+                        </div>
+                        <div class="campo">
+                            <label for="cliente-correo">Correo del Cliente*</label>
+                            <input type="email" id="cliente-correo" placeholder="cliente@correo.com" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adjuntar soportes (como en tu Mockup 2) -->
+                <div class="campo-archivo">
+                    <label for="soporte-archivo">Adjuntar Documentos Relacionados (Cédulas, Soporte PDF):</label>
+                    <input type="file" id="soporte-archivo" accept=".pdf,.jpg,.png">
+                </div>
+
+                <!-- Acción principal: Calcular Liquidación (Mockup 2 -> Mockup 3) -->
+                <button type="submit" class="btn-verde">
+                    Calcular y Procesar Cotización
+                </button>
+            </form>
+        </section>
+
+        <!-- COLUMNA DERECHA: RESUMEN DE LIQUIDACIÓN (Mockup 2, 3 y 4) -->
+        <aside class="panel-card panel-liquidacion">
+            <h2>Resumen de Liquidación</h2>
+
+            <!-- Estado inicial neutro (Mockup 2) -->
+            <div id="estado-neutro" class="estado-vacio">
+                <p>Ingrese los datos de la izquierda y presione <strong>"Calcular y Procesar Cotización"</strong> para generar la liquidación automática desde el servidor.</p>
+            </div>
+
+            <!-- Estado dinámico calculado (Mockup 3) -->
+            <div id="detalle-liquidacion" style="display: none;">
+                <div class="resumen-cabecera" id="resumen-hotel-info"></div>
+
+                <ul class="lista-valores" id="lista-desglose"></ul>
+
+                <div class="total-destacado">
+                    <span>VALOR TOTAL:</span>
+                    <strong id="valor-total-final">$0</strong>
+                </div>
+
+                <!-- Acción de persistencia en MySQL (Mockup 3 -> Mockup 4) -->
+                <button type="button" id="btn-confirmar-guardar" class="btn-azul">
+                    Confirmar y Guardar Reserva
+                </button>
+            </div>
+
+            <!-- Banner de confirmación exitosa (Mockup 4) -->
+            <div id="banner-confirmacion" class="alerta-exito" style="display: none;"></div>
+        </aside>
+
+    </main>
+
+    <script src="JS/cotizador.js"></script>
+</body>
+</html>

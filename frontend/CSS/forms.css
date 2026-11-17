@@ -1,0 +1,195 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    /* Degradado íntimo en tonos verde bosque profundo sin imágenes */
+    background: radial-gradient(circle at top left, #1e3a2b 0%, #101f17 55%, #0a140f 100%);
+    color: #f1faee;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Barra superior minimalista para regresar */
+.barra-volver {
+    padding: 22px 6%;
+}
+
+.barra-volver a {
+    color: #ffd166;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: opacity 0.25s ease;
+}
+
+.barra-volver a:hover {
+    opacity: 0.75;
+}
+
+/* Contenedor centrado de la tarjeta */
+.auth-contenedor {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Tarjeta principal inspirada en la estructura de tu referencia */
+.auth-tarjeta {
+    width: 100%;
+    max-width: 460px;
+    background-color: #16291f;
+    border: 1px solid rgba(255, 209, 102, 0.22);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+}
+
+/* Línea superior de acento en color dorado cálido */
+.franja-superior {
+    width: 100%;
+    height: 7px;
+    background: linear-gradient(90deg, #2d6a4f, #ffd166);
+}
+
+.auth-cuerpo {
+    padding: 40px 38px 45px 38px;
+}
+
+/* Marca en tipografía limpia */
+.marca-texto {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 28px;
+}
+
+.marca-titulo {
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #ffd166;
+}
+
+.marca-subtitulo {
+    font-size: 0.72rem;
+    letter-spacing: 4px;
+    color: #a3b18a;
+    font-weight: 600;
+}
+
+/* Títulos y subtítulos */
+h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.descripcion {
+    font-size: 0.9rem;
+    color: #cbd5c0;
+    line-height: 1.5;
+    margin-bottom: 26px;
+}
+
+/* Campos de entrada */
+.grupo-campo {
+    margin-bottom: 16px;
+}
+
+.grupo-campo input {
+    width: 100%;
+    padding: 15px 16px;
+    background-color: #101f17;
+    border: 1.5px solid #344e41;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.grupo-campo input::placeholder {
+    color: #849689;
+}
+
+.grupo-campo input:focus {
+    border-color: #ffd166;
+    background-color: #13241b;
+}
+
+/* Botón principal cálido */
+.btn-principal {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #ffd166;
+    color: #101f17;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.btn-principal:hover {
+    background-color: #ffdf8e;
+    transform: translateY(-1px);
+}
+
+/* Botón secundario tipo enlace centrado (como "Crear cuenta" en tu referencia) */
+.btn-secundario {
+    display: block;
+    width: 100%;
+    margin-top: 22px;
+    background: transparent;
+    border: none;
+    color: #ffd166;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: color 0.25s ease;
+}
+
+.btn-secundario:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Caja que muestra el viaje elegido desde Vuelos.html */
+.caja-reserva {
+    background-color: rgba(255, 209, 102, 0.1);
+    border-left: 4px solid #ffd166;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #f1faee;
+    margin-bottom: 22px;
+    line-height: 1.45;
+}
+
+/* Mensaje de confirmación al enviar */
+.mensaje-estado {
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 8px;
+    background-color: rgba(45, 106, 79, 0.35);
+    border: 1px solid #52b788;
+    color: #d8f3dc;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .auth-cuerpo {
+        padding: 30px 24px;
+    }
+}
